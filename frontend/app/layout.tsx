@@ -18,29 +18,29 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Web3 App Template - Web3 Starter Kit",
-    template: "%s | Web3 App Template - Web3 Starter Kit",
+    default: "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+    template: "%s | LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
   },
-  description: "Web3 App Template - Web3 Starter Kit",
-  keywords: ["web3", "web3 app template", "ethereum", "web3 starter kit"],
-  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: env.NEXT_PUBLIC_APP_URL,
-    title: "Web3 App Template - Web3 Starter Kit",
-    description: "Web3 App Template - Web3 Starter Kit",
-    siteName: "Web3 App Template - Web3 Starter Kit",
+  description: "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+  keywords: ["liquidmesh", "liquidmesh ai", "somnia", "concentrated liquidity"],
+	metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+	alternates: {
+		canonical: '/',
+	},
+	openGraph: {
+		type: 'website',
+		locale: 'en_US',
+		url: env.NEXT_PUBLIC_APP_URL,
+		title: 'LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.',
+		description: 'LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.',
+		siteName: 'LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.',
   },
   twitter: {
     card: "summary_large_image",
-    title: "Web3 App Template - Web3 Starter Kit",
-    description: "Web3 App Template - Web3 Starter Kit",
-    site: "@web3starterkit",
-    creator: "@web3starterkit",
+    title: "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+    description: "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+    site: "@liquidmesh",
+    creator: "@liquidmesh",
   },
   robots: {
     index: true,
@@ -53,10 +53,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
-  manifest: "/site.webmanifest",
+  icons: {  
+		icon: '/favicon.ico',
+	},
+	manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({

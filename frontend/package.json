@@ -1,7 +1,7 @@
 {
-  "name": "web3-app-template",
+  "name": "liquidmesh-frontend",
   "version": "0.1.0",
-  "description": "Web3 App Template - Web3 Starter Kit",
+  "description": "LiquidMesh - Frontend",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
