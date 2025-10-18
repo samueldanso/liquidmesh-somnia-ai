@@ -2,11 +2,11 @@
 
 **The AI orchestration layer for concentrated liquidity on Somnia.**
 
-[![Video Demo ]()]()
+-   **Video Demo**: [Watch Demo]()
+-   **Pitch Deck**: [View Presentation]()
 
-[Pitch Deck]()
+LiquidMesh is a **decentralized, non-custodial autonomous liquidity protocol** built on Somnia powered by a multi-agent orchestration framework. It enables liquidity providers (LPs) to achieve maximum capital efficiency and superior risk-adjusted yield by autonomously reasoning, executing, and managing liquidity positions across Somnia DEXes and beyond.
 
-LiquidMesh is a **multi-agent framework** designed to automate and optimize concentrated liquidity positions in Somnia’s DeFi ecosystem.
 It coordinates specialized AI agents — the **Watcher**, **Strategist**, and **Executor** — to continuously monitor pool metrics, reason about market changes, and autonomously execute liquidity strategies.
 
 ### 🌊 Core Idea
@@ -15,17 +15,12 @@ It coordinates specialized AI agents — the **Watcher**, **Strategist**, and **
 
 ## 🚀 Key Features
 
--   **Autonomous liquidity management** - Fully autonomous liquidity optimization ensuring maximum capital efficiency and superior risk-adjusted yield.
-
--   **Multi-agent orchestration framework** - Modular agent orchestration framework using specialized AI agents Watcher, Strategist, Executor, for easy integration of new agents (e.g., risk, arbitrage).
-
--   **Superior Yield** - Maximizes capital efficiency and delivers superior risk-adjusted yield by constantly optimizing range positions.
-
--   **Self-Custodial** - Fully on-chain and self-custodial.
-
--   **DeFi UX Abstraction** - Simplifies the complex DeFi UX.
-
--   **AI Native DeFi to Somnia** - Optimized for low-latency execution and high TVL contribution to the Somnia ecosystem.
+-   **Autonomous Management** - Fully automated liquidity optimization for maximum capital efficiency
+-   **Multi-Agent Framework** - Specialized AI agents (Watcher, Strategist, Executor) with modular architecture
+-   **Superior Yield** - Constantly optimizes range positions for better returns
+-   **Self-Custodial** - Fully on-chain and non-custodial
+-   **Simplified UX** - Abstracts complex DeFi interactions
+-   **Somnia Native** - Optimized for low-latency execution on Somnia ecosystem
 
 ## 🔄 How It Works — Workflow
 
@@ -55,16 +50,14 @@ flowchart TD
     F --> D
 ```
 
-### Full User Flow:
+### User Flow:
 
-1. **User connects wallet** (Somnia testnet or mock)
-2. **User selects or deposits tokens** for liquidity
-3. **AgentMesh initializes and activates agents**
-4. **Watcher starts tracking pool data** (live or mock)
-5. **Strategist proposes new LP range and rationale** (e.g., "volatility rising — narrow range for higher fee capture")
-6. **Executor simulates or produces a signed transaction payload**
-7. **Dashboard visualizes agent reasoning & rationale**, before/after metrics, and strategy performance projections
-8. **Loop repeats periodically** (e.g., hourly) or upon real-time market event triggers
+1. **Connect wallet** and deposit tokens
+2. **Agents initialize** and start monitoring
+3. **Strategist analyzes** market conditions and proposes optimal ranges
+4. **Executor executes** transactions automatically
+5. **Dashboard shows** real-time performance and agent reasoning
+6. **Continuous optimization** based on market changes
 
 ## 🏗️ Technical Architecture
 
@@ -140,77 +133,41 @@ sequenceDiagram
 
 ### ⚙️ Tech Stack
 
-| Layer          | Technology                                     | Purpose                      |
-| -------------- | ---------------------------------------------- | ---------------------------- |
-| **Frontend**   | [Next.js 15](https://nextjs.org)               | React framework with SSR/SSG |
-|                | [Tailwind CSS](https://tailwindcss.com)        | Utility-first CSS framework  |
-|                | [Shadcn UI](https://ui.shadcn.com/)            | Component library            |
-|                | [Wagmi](https://wagmi.sh)                      | React hooks for Ethereum     |
-|                | [Viem](https://viem.sh)                        | TypeScript Ethereum library  |
-| **Backend**    | [Node.js](https://nodejs.org/)                 | Runtime environment          |
-|                | [Bun](https://bun.sh/)                         | Fast JavaScript runtime      |
-|                | [Hono](https://hono.dev/)                      | Lightweight web framework    |
-|                | [Supabase](https://supabase.com/)              | Backend-as-a-Service         |
-| **AI/Agents**  | [Vercel AI SDK](https://www.vercel.com/ai-sdk) | AI integration framework     |
-|                | [OpenAI](https://openai.com/)                  | Large Language Model         |
-| **Blockchain** | [Somnia Testnet](https://docs.somnia.network/) | Target blockchain            |
-|                | [Solidity](https://docs.soliditylang.org/)     | Smart contract language      |
-|                | [Hardhat](https://hardhat.org/)                | Development framework        |
-| **Wallet**     | [Privy](https://docs.privy.io/)                | Wallet connection service    |
+-   **Frontend:** [Next.js 15](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), [Shadcn UI](https://ui.shadcn.com/),
+-   **Backend:** [Node.js](https://nodejs.org/) with [Bun](https://bun.sh/), [Hono](https://hono.dev/), [Supabase](https://supabase.com/)
+-   **AI/Agent:** [Vercel AI SDK](https://www.vercel.com/ai-sdk)
+-   **LLM:** [OpenAI](https://openai.com/)
+-   **Smart Contracts:** [Solidity](https://docs.soliditylang.org/) & [Hardhat](https://hardhat.org/docs/getting-started)
+-   **Blockchain:** [Somnia Testnet](https://docs.somnia.network/)
+-   **Web3 Integration:** [wagmi](https://wagmi.sh) & [viem](https://viem.sh)
+-   **Connect Wallet:** [Privy](https://docs.privy.io/)
 
 ## 🚀 Getting Started
 
-### Prerequisites
-
--   [Bun](https://bun.sh/) installed
--   [Node.js](https://nodejs.org/) 18+
--   [Git](https://git-scm.com/) for version control
-
-### Installation
-
-1. **Clone the repository**
+1. Clone the repository
 
     ```bash
     git clone https://github.com/samueldanso/liquidmesh-somnia-ai
     cd liquidmesh-somnia-ai
     ```
 
-2. **Install dependencies**
+2. Install dependencies
 
     ```bash
     bun install
     ```
 
-3. **Environment setup**
+3. Copy the `.env.example` to `.env` and update the variables.
 
     ```bash
     cp .env.example .env
-    # Edit .env with your configuration
     ```
 
-4. **Start development server**
+4. Start the development server
+
     ```bash
     bun dev
     ```
-
-### Development Commands
-
-```bash
-# Start development server
-bun dev
-
-# Build for production
-bun run build
-
-# Run tests
-bun test
-
-# Lint code
-bun run lint
-
-# Format code
-bun run format
-```
 
 ## 🚀 Deploy
 
