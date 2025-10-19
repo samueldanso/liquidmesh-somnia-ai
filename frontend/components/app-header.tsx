@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
 import { WalletConnect } from "./wallet-connect";
 
-export default function Header() {
+export default function AppHeader() {
   return (
     <header className="container mx-auto">
       <nav className="flex h-16 items-center justify-between px-4 gap-4">

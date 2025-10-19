@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
+import Footer from "@/components/app-footer";
+import Header from "@/components/app-header";
 import { Providers } from "@/components/providers";
 import { env } from "@/env";
 import "./globals.css";
@@ -18,27 +18,35 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
-    template: "%s | LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+    default:
+      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+    template:
+      "%s | LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
   },
-  description: "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+  description:
+    "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
   keywords: ["liquidmesh", "liquidmesh ai", "somnia", "concentrated liquidity"],
-	metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-	alternates: {
-		canonical: '/',
-	},
-	openGraph: {
-		type: 'website',
-		locale: 'en_US',
-		url: env.NEXT_PUBLIC_APP_URL,
-		title: 'LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.',
-		description: 'LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.',
-		siteName: 'LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.',
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: env.NEXT_PUBLIC_APP_URL,
+    title:
+      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+    description:
+      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+    siteName:
+      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
-    description: "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+    title:
+      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+    description:
+      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
     site: "@liquidmesh",
     creator: "@liquidmesh",
   },
@@ -53,10 +61,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {  
-		icon: '/favicon.ico',
-	},
-	manifest: '/site.webmanifest',
+  icons: {
+    icon: "/favicon.ico",
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -69,11 +77,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
-          <Header />
-          <main className="container mx-auto px-4 py-8">{children}</main>
-          <Footer />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

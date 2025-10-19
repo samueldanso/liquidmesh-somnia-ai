@@ -1,7 +1,6 @@
 # LiquidMesh - Web
 
-A modern, production-ready starter template for building decentralized applications with sensible defaults.
-
+Web interface for LiquidMesh App.
 
 ## ✨ Features
 
