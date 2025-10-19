@@ -3,6 +3,9 @@ import Link from "next/link";
 export default function AppFooter() {
   return (
     <footer className="py-6 md:py-0">
+      {/* Thin divider line */}
+      <div className="border-t border-border/50"></div>
+
       <div className="container mx-auto flex items-center justify-between gap-4 px-4 sm:h-16">
         <Link
           href="https://liquidmesh-somnia-ai.vercel.app"
