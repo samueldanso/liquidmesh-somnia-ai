@@ -80,7 +80,7 @@ export const HeroHeader = () => {
                   size="default"
                   className="bg-brand-primary hover:bg-brand-primary/90 text-brand-primary-foreground text-base font-medium px-6 py-2 rounded-md"
                 >
-                  <Link href="/app">
+                  <Link href="/dashboard">
                     <span className="text-base font-medium">Open App</span>
                   </Link>
                 </Button>
