@@ -16,7 +16,7 @@ It coordinates specialized AI agents — the **Watcher**, **Strategist**, and **
 ## 🚀 Key Features
 
 -   **Autonomous Management** - Fully automated liquidity optimization for maximum capital efficiency
--   **Multi-Agent Framework** - Specialized AI agents (Watcher, Strategist, Executor) with modular architecture
+-   **Multi-Agent Orchestration** - Specialized AI agent (Watcher, Strategist, Executor) coordinate autonomously using a modular, extensible architecture pattern
 -   **Superior Yield** - Constantly optimizes range positions for better returns
 -   **Self-Custodial** - Fully on-chain and non-custodial
 -   **Simplified UX** - Abstracts complex DeFi interactions
@@ -59,7 +59,38 @@ flowchart TD
 5. **Dashboard shows** real-time performance and agent reasoning
 6. **Continuous optimization** based on market changes
 
-## 🏗️ Technical Architecture
+## 🏗️ Multi-Agent Orchestration Architecture
+
+LiquidMesh is built on a **modular multi-agent orchestration pattern** designed for coordinated AI reasoning in DeFi.
+
+### Architecture Principles
+
+**Separation of Concerns**
+
+-   Each agent has a single, well-defined responsibility
+-   Watcher = Data collection | Strategist = Decision-making | Executor = Transaction handling
+
+**Agent Coordination**
+
+-   AgentMesh Orchestrator routes messages between agents
+-   Shared state management across agent lifecycle
+-   Built-in retry logic and error handling
+
+**Modularity & Extensibility**
+
+-   Agents can be upgraded or replaced independently
+-   Clear interfaces enable custom agent development
+-   Pattern applicable to risk management, arbitrage, governance automation
+
+**Technical Implementation**
+
+-   Message routing via EventEmitter/lightweight message bus
+-   Real-time coordination and decision logging
+-   Fault-tolerant design prevents single points of failure
+
+This architecture demonstrates a reusable pattern for building AI-native DeFi applications on Somnia.
+
+## 🏗️ Technical Architecture & Agent Orchestration
 
 ### System Overview
 
@@ -175,13 +206,22 @@ Follow the deployment guides for [Vercel](https://nextjs.org/learn-pages-router/
 
 ## 📋 Roadmap
 
-1. Build minimal AgentMesh core
-2. Implement Watcher, Strategist, and Executor
+**Phase 1: Core System (Hackathon)**
+
+1. Build AgentMesh orchestration core
+2. Implement specialized agents (Watcher, Strategist, Executor)
 3. Integrate Somnia pool data and simulation engine
 4. Deliver demo dashboard + orchestrated CLM pipeline
-5. Submit for Somnia AI Hackathon
+
+**Phase 2: Framework Evolution (Post-Hackathon)** 5. Abstract AgentMesh for general DeFi use cases 6. Developer documentation for custom agents 7. Additional agent examples (risk management, arbitrage) 8. Community SDK and tooling
 
 ## 🏆 Built at Somnia AI Hackathon 2025
+
+## 🎯 Hackathon Tracks
+
+**Primary: DeFi Agents** - Autonomous CLM protocol solving real LP pain points on Somnia
+
+**Secondary: Infra Agents** - Multi-agent orchestration architecture demonstrating coordinated AI reasoning patterns for DeFi
 
 **Team**
 
