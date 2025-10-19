@@ -1,12 +1,53 @@
 {
-  "name": "agents",
-  "scripts": {
-    "dev": "bun run --hot src/index.ts"
-  },
-  "dependencies": {
-    "hono": "^4.10.1"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
-  }
+	"name": "liquidmesh-agents",
+	"version": "1.0.0",
+	"description": "LiquidMesh multi-agent orchestration system for autonomous liquidity management on Somnia",
+	"type": "module",
+	"main": "src/index.ts",
+	"scripts": {
+		"dev": "bun run --hot src/index.ts",
+		"start": "bun run src/index.ts",
+		"build": "bun build src/index.ts --outdir dist --target bun",
+		"test": "bun test",
+		"test:watch": "bun test --watch",
+		"test:coverage": "bun test --coverage",
+		"lint": "biome check",
+		"format": "biome format --write",
+		"check": "biome check --write",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@ai-sdk/openai": "^1.0.7",
+		"@supabase/supabase-js": "^2.47.0",
+		"ai": "^4.0.12",
+		"figlet": "^1.8.0",
+		"hono": "^4.6.12",
+		"openai": "^4.76.1",
+		"viem": "^2.21.54",
+		"zod": "^3.23.8"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@types/figlet": "^1.7.0",
+		"typescript": "^5.0.0"
+	},
+	"keywords": [
+		"somnia",
+		"defi",
+		"liquidity",
+		"agents",
+		"ai",
+		"automation",
+		"multi-agent",
+		"orchestration",
+		"clm",
+		"concentrated-liquidity"
+	],
+	"author": "LiquidMesh Team <me.samueldanso@gmail.com>",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/samueldanso/liquidmesh-somnia-ai.git",
+		"directory": "agents"
+	}
 }
