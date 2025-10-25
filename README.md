@@ -1,11 +1,11 @@
-# 🧩 LiquidMesh — Coordinated Liquidity Manager (CLM)
+# 🧩 LiquidMesh Finance— Coordinated Liquidity Manager (CLM)
 
 **The AI orchestration layer for concentrated liquidity on Somnia.**
 
 -   **Video Demo**: [Watch Demo]()
 -   **Pitch Deck**: [View Presentation]()
 
-LiquidMesh is a **decentralized, non-custodial autonomous liquidity protocol** built on Somnia powered by a multi-agent orchestration framework. It enables liquidity providers (LPs) to achieve maximum capital efficiency and superior risk-adjusted yield by autonomously reasoning, executing, and managing liquidity positions across Somnia DEXes and beyond.
+LiquidMesh is a **decentralized, non-custodial autonomous liquidity orchestration protocol** built on Somnia powered by a multi-agent orchestration framework. It enables liquidity providers (LPs) to achieve maximum capital efficiency and superior risk-adjusted yield by autonomously reasoning, executing, and managing liquidity positions across Somnia DEXes and beyond.
 
 It coordinates specialized AI agents — the **Watcher**, **Strategist**, and **Executor** — to continuously monitor pool metrics, reason about market changes, and autonomously execute liquidity strategies.
 
@@ -229,4 +229,4 @@ Follow the deployment guides for [Vercel](https://nextjs.org/learn-pages-router/
 
 ## 🔗 Links
 
--   **Live Demo**: [LiquidMesh](https://liquidmesh-somnia-ai.vercel.app)
+-   **Live Demo**: [LiquidMesh](https://www.liquidmeshfi.xyz/)
