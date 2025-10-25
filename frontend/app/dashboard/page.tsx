@@ -1,26 +1,29 @@
+import { ErrorBoundary } from '@/components/error-boundary'
 import { StatsCards } from './_components/stats-cards'
 import { AgentActivity } from './_components/agent-activity'
 import { PositionsTable } from './_components/positions-table'
 
 export default function Dashboard() {
 	return (
-		<div className="space-y-8">
-			{/* Header */}
-			<div>
-				<h1 className="text-3xl font-bold tracking-tight">LiquidMesh Dashboard</h1>
-				<p className="text-muted-foreground mt-2">
-					AI-powered autonomous liquidity management on Somnia
-				</p>
+		<ErrorBoundary>
+			<div className="space-y-8">
+				{/* Header */}
+				<div>
+					<h1 className="text-3xl font-bold tracking-tight">LiquidMesh Dashboard</h1>
+					<p className="text-muted-foreground mt-2">
+						AI-powered autonomous liquidity management on Somnia
+					</p>
+				</div>
+
+				{/* Stats Overview */}
+				<StatsCards />
+
+				{/* Positions Table */}
+				<PositionsTable />
+
+				{/* Agent Activity Feed */}
+				<AgentActivity />
 			</div>
-
-			{/* Stats Overview */}
-			<StatsCards />
-
-			{/* Positions Table */}
-			<PositionsTable />
-
-			{/* Agent Activity Feed */}
-			<AgentActivity />
-		</div>
+		</ErrorBoundary>
 	)
 }

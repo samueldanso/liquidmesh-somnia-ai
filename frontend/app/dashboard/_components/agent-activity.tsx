@@ -1,8 +1,9 @@
 'use client'
 
-import { Activity, Brain, Zap, Clock } from 'lucide-react'
+import { Activity, Brain, Zap, Clock, AlertCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useAgentThoughts } from '@/hooks/use-agent-data'
 import { formatDistanceToNow } from 'date-fns'
 
@@ -19,9 +20,9 @@ const AGENT_COLORS = {
 }
 
 export function AgentActivity() {
-	const { data: thoughts, isLoading } = useAgentThoughts()
+	const { data: thoughts = [], isLoading, isError, error } = useAgentThoughts()
 
-	const recentThoughts = thoughts?.slice(0, 10) || []
+	const recentThoughts = thoughts.slice(0, 10)
 
 	return (
 		<Card>
@@ -34,12 +35,37 @@ export function AgentActivity() {
 			<CardContent>
 				<div className="space-y-3">
 					{isLoading && (
-						<div className="text-center py-8 text-muted-foreground">
-							Loading activity...
+						<>
+							{[...Array(5)].map((_, i) => (
+								<div
+									key={i}
+									className="flex items-start gap-4 p-3 border rounded-lg"
+								>
+									<Skeleton className="size-4 mt-0.5 rounded" />
+									<div className="flex-1 space-y-2">
+										<div className="flex items-center gap-2">
+											<Skeleton className="h-4 w-20" />
+											<Skeleton className="h-4 w-12" />
+										</div>
+										<Skeleton className="h-3 w-full" />
+										<Skeleton className="h-3 w-3/4" />
+									</div>
+									<Skeleton className="h-3 w-16" />
+								</div>
+							))}
+						</>
+					)}
+
+					{isError && (
+						<div className="flex flex-col items-center justify-center py-8 text-center">
+							<AlertCircle className="size-8 text-destructive mb-2" />
+							<p className="text-sm text-muted-foreground">
+								{error?.message || 'Failed to load agent activity'}
+							</p>
 						</div>
 					)}
 
-					{!isLoading && recentThoughts.length === 0 && (
+					{!isLoading && !isError && recentThoughts.length === 0 && (
 						<div className="text-center py-8 text-muted-foreground">
 							No agent activity yet
 						</div>
