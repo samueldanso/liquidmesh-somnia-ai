@@ -97,14 +97,27 @@ cp .env.example .env
 bun run dev
 ```
 
-## 📊 Agent Flow
+## 📊 Agent Flow & Autonomous Loop
 
 ```
 Watcher → Strategist → Executor → Strategist → Watcher
-   ↓          ↓           ↓
-  Mock      AI          Mock
-  Data    Decision       TX
+   ↓          ↓           ↓              ↓
+  Mock      AI          Mock       Store Report
+  Data    Decision       TX          + Wait
+
+When stable: noFurtherActionsTool → Wait (configurable) → Restart
 ```
+
+### Periodic Execution
+
+The agents run **autonomously** with intelligent wait times:
+
+-   **AI-Driven:** Watcher decides when to wait using `noFurtherActionsTool`
+-   **Configurable:** Set `AGENT_INTERVAL` in `.env` (default: 60000ms = 1 min)
+-   **Smart:** Shorter waits for volatile markets, longer for stable conditions
+-   **Gas-Efficient:** Prevents unnecessary rebalancing when positions are optimal
+
+This prevents abuse while allowing rapid response to market changes.
 
 ## 🏗️ File Structure
 
