@@ -1,26 +1,22 @@
-// Environment Configuration
-// Environment variables for LiquidMesh agents
+import { z } from "zod";
 
-export const env = {
-	// OpenAI Configuration
-	OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',
+const envSchema = z.object({
+	PORT: z.coerce.number().default(8000),
+	SUPABASE_URL: z.string(),
+	SUPABASE_KEY: z.string(),
+	PRIVATE_KEY: z.string(),
+	OPENAI_API_KEY: z.string(),
+	SOMNIA_RPC_URL: z.string().default("https://dream-rpc.somnia.network"),
+	CHAIN_ID: z.string().default("50312"),
+	CHAIN_NAME: z.string().default("somnia-testnet"),
+	MODEL_NAME: z.string().default("gpt-4o"),
+	AGENT_INTERVAL: z.coerce.number().default(60000), // 1 minute
+});
 
-	// Supabase Configuration
-	SUPABASE_URL: process.env.SUPABASE_URL || '',
-	SUPABASE_KEY: process.env.SUPABASE_KEY || '',
+export const env = envSchema.parse(process.env);
 
-	// Somnia Configuration
-	SOMNIA_RPC_URL: process.env.SOMNIA_RPC_URL || 'https://rpc.somnia.network',
-	SOMNIA_CHAIN_ID: process.env.SOMNIA_CHAIN_ID || '1',
+export type Environment = {
+	Bindings: z.infer<typeof envSchema>;
+};
 
-	// Wallet Configuration
-	PRIVATE_KEY: process.env.PRIVATE_KEY || '',
-	WALLET_ADDRESS: process.env.WALLET_ADDRESS || '',
-
-	// Server Configuration
-	PORT: process.env.PORT || '8000',
-
-	// Agent Configuration
-	AGENT_INTERVAL: process.env.AGENT_INTERVAL || '300000', // 5 minutes
-	MAX_GAS_PRICE: process.env.MAX_GAS_PRICE || '1000000000', // 1 gwei
-}
+export default env;

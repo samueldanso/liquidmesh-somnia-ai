@@ -1,9 +1,11 @@
-import { Hono } from 'hono'
+import { app } from "./app";
+import env from "./env";
+import { walletAddress, watcherAgent } from "./setup";
 
-const app = new Hono()
+console.log(`[🚀] Starting LiquidMesh agent loop for wallet: ${walletAddress}`);
+watcherAgent.start(walletAddress);
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
-
-export default app
+export default {
+	port: env.PORT || 8000,
+	fetch: app.fetch,
+};

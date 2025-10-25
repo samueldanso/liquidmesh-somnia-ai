@@ -1,5 +1,4 @@
 // TypeScript Types for LiquidMesh Agents
-// Type definitions for the multi-agent system
 
 export interface AgentReport {
 	id: string

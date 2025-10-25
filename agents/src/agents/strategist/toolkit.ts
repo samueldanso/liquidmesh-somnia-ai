@@ -1,10 +1,27 @@
-// Strategist Agent Toolkit - Tools for strategy formulation
-// Based on Xenon Task Manager Agent tools, adapted for liquidity management
+import { tool } from "ai";
+import { z } from "zod";
 
-export const strategistTools = {
-	// TODO: Implement Strategist tools
-	// - sendMessageToWatcher: Request additional market data
-	// - sendMessageToExecutor: Send strategy decisions for execution
-	// - analyzeMarketConditions: Process market intelligence
-	// - generateStrategy: Create optimal liquidity strategies
+export function getStrategistToolkit() {
+	return {
+		sendMessageToWatcher: tool({
+			description:
+				"Use this tool to request additional data or clarification from the Watcher agent.",
+			inputSchema: z.object({
+				message: z
+					.string()
+					.describe("The message or question to send to the Watcher"),
+			}),
+		}),
+		sendMessageToExecutor: tool({
+			description:
+				"Use this tool to send liquidity management strategies to the Executor agent for execution.",
+			inputSchema: z.object({
+				message: z
+					.string()
+					.describe(
+						"The strategy instructions in detail, including pool addresses, ranges, and expected outcomes",
+					),
+			}),
+		}),
+	};
 }
