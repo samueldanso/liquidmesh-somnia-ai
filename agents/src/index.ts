@@ -21,4 +21,8 @@ if (env.AUTO_START === 'true') {
 export default {
 	port: env.PORT || 8000,
 	fetch: app.fetch,
+	development: true,
+	// Increase timeout for AI agent processing
+	// Agents can take 30-60s to fetch data, analyze, and reason
+	idleTimeout: 120, // 2 minutes
 }
