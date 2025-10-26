@@ -23,6 +23,24 @@
 -   **GET /positions** - Mock liquidity positions
 -   **GET /positions/pools** - Mock pool metrics
 
+## ⚙️ Configuration
+
+### Environment Variables
+
+```env
+# Required
+OPENAI_API_KEY=sk-...              # Your OpenAI API key
+SUPABASE_URL=https://...           # Supabase project URL
+SUPABASE_KEY=your-anon-key         # Supabase anon key
+PRIVATE_KEY=0x...                  # Wallet private key
+
+# Optional
+PORT=8000                          # API server port (default: 8000)
+AUTO_START=false                   # Auto-start on deploy (default: false)
+CHECK_INTERVAL_HOURS=2             # Check interval in hours (default: 2)
+MODEL_NAME=gpt-4o                  # OpenAI model (default: gpt-4o)
+```
+
 ## 🚀 Quick Start
 
 ### 1. Setup Supabase Database
@@ -97,6 +115,41 @@ cp .env.example .env
 bun run dev
 ```
 
+**Note:** By default, agents won't auto-start. Use the API to control them.
+
+## 🎮 Agent Control System
+
+### Control Endpoints
+
+```bash
+# Start autonomous monitoring
+POST /agents/start
+
+# Stop monitoring
+POST /agents/stop
+
+# Check status
+GET /agents/status
+
+# Response example:
+{
+  "isRunning": true,
+  "wallet": "0x...",
+  "cycleCount": 5,
+  "checkIntervalHours": 2,
+  "nextCheckIn": "2 hours",
+  "status": "online"
+}
+```
+
+### Usage Flow
+
+1. **Deploy to Production**: Agents stay idle (no OpenAI costs)
+2. **Start Monitoring**: `POST /agents/start` → Begins autonomous loop
+3. **Dashboard Updates**: Frontend polls for real-time status
+4. **Periodic Checks**: Agents check every 2 hours (configurable)
+5. **Stop Anytime**: `POST /agents/stop` → Agents go idle
+
 ## 📊 Agent Flow & Autonomous Loop
 
 ```
@@ -110,14 +163,19 @@ When stable: noFurtherActionsTool → Wait (configurable) → Restart
 
 ### Periodic Execution
 
-The agents run **autonomously** with intelligent wait times:
+The agents run **autonomously** with fixed intervals (inspired by Monarch Lend's architecture):
 
--   **AI-Driven:** Watcher decides when to wait using `noFurtherActionsTool`
--   **Configurable:** Set `AGENT_INTERVAL` in `.env` (default: 60000ms = 1 min)
--   **Smart:** Shorter waits for volatile markets, longer for stable conditions
--   **Gas-Efficient:** Prevents unnecessary rebalancing when positions are optimal
+-   **Fixed Interval:** Checks every 2 hours by default (configurable via `CHECK_INTERVAL_HOURS`)
+-   **Predictable Costs:** ~12 checks/day = ~$1.80/day per wallet with gpt-4o
+-   **Production-Ready:** Simple, reliable, no AI confusion about timing
+-   **Gas-Efficient:** Prevents unnecessary rebalancing with reasonable check frequency
 
-This prevents abuse while allowing rapid response to market changes.
+**Why Fixed Intervals?**
+
+-   ✅ Predictable OpenAI costs
+-   ✅ No AI confusion about wait times
+-   ✅ Industry standard (used by Monarch, Yearn, etc.)
+-   ✅ Easy to debug and monitor
 
 ## 🏗️ File Structure
 

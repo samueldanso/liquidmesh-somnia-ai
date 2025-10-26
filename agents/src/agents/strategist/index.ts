@@ -1,59 +1,40 @@
-import { openai } from "@ai-sdk/openai";
-import { generateText, stepCountIs } from "ai";
-import type { EventBus } from "../../comms/event-bus";
-import env from "../../env";
-import { saveThought, storeReport } from "../../memory/db";
+import { openai } from '@ai-sdk/openai'
+import { generateText, stepCountIs } from 'ai'
+import type { EventBus } from '../../comms/event-bus'
+import env from '../../env'
+import { saveThought, storeReport } from '../../memory/db'
 import {
 	getStrategistFinalReportSystemPrompt,
 	getStrategistSystemPrompt,
-} from "../../system-prompts";
-import { Agent } from "../agent";
-import { getStrategistToolkit } from "./toolkit";
+} from '../../system-prompts'
+import { Agent } from '../agent'
+import { getStrategistToolkit } from './toolkit'
 
 /**
  * Strategist Agent - Analyzes Watcher reports and generates liquidity strategies
  */
 export class StrategistAgent extends Agent {
 	constructor(name: string, eventBus: EventBus) {
-		super(name, eventBus);
+		super(name, eventBus)
 	}
 
 	async handleEvent(event: string, data: any): Promise<void> {
-		console.log(`[${this.name}] received data from [${event.split("-")[0]}].`);
+		console.log(`[${this.name}] received data from [${event.split('-')[0]}].`)
 		switch (event) {
 			case `watcher-${this.name}`:
-				return this.handleWatcherReport(data);
+				return this.handleWatcherReport(data)
 			case `executor-${this.name}`:
-				return this.handleExecutorResult(data);
+				return this.handleExecutorResult(data)
 		}
 	}
 
-	private async handleWatcherReport(data: {
-		report: string;
-		noFurtherActions?: boolean;
-		waitTime?: number;
-	}): Promise<void> {
+	private async handleWatcherReport(data: { report: string }): Promise<void> {
 		data.report &&
 			console.log(
-				`[${this.name}] received a report from the watcher agent:\n\n${data.report}.`,
-			);
+				`[${this.name}] received a report from the watcher agent:\n\n${data.report}.`
+			)
 
-		const toolkit = getStrategistToolkit();
-
-		if (data.noFurtherActions && data.waitTime) {
-			console.log(
-				`[${this.name}] no further actions needed. waiting for ${
-					data.waitTime / 1000
-				} seconds.`,
-			);
-			// sleep for the waitTime
-			await new Promise((resolve) => setTimeout(resolve, data.waitTime));
-
-			// ask the watcher agent for a new report
-			this.eventBus.emit(`${this.name}-watcher`, undefined);
-
-			return;
-		}
+		const toolkit = getStrategistToolkit()
 
 		const { toolCalls } = await generateText({
 			model: openai(env.MODEL_NAME),
@@ -67,33 +48,28 @@ export class StrategistAgent extends Agent {
 			tools: toolkit,
 			stopWhen: stepCountIs(10),
 			onStepFinish: this.onStepFinish.bind(this),
-		});
+		})
 
-		const tool = toolCalls[0];
+		const tool = toolCalls[0]
 
-		if (!tool || tool.toolName !== "sendMessageToExecutor") {
+		if (!tool || tool.toolName !== 'sendMessageToExecutor') {
 			this.eventBus.emit(`${this.name}-watcher`, {
-				result: tool ? (tool as any).input.message : "Generate a new report.",
+				result: tool ? (tool as any).input.message : 'Generate a new report.',
 				report: data.report,
-			});
-		} else if (tool.toolName === "sendMessageToExecutor") {
+			})
+		} else if (tool.toolName === 'sendMessageToExecutor') {
 			this.eventBus.emit(`${this.name}-executor`, {
 				result: (tool as any).input.message,
 				report: data.report,
-			});
+			})
 		}
 	}
 
-	async handleExecutorResult(data: {
-		result: string;
-		report: string;
-	}): Promise<void> {
-		console.log(
-			`[${this.name}] received result from the executor agent:\n\n${data.result}.`,
-		);
+	async handleExecutorResult(data: { result: string; report: string }): Promise<void> {
+		console.log(`[${this.name}] received result from the executor agent:\n\n${data.result}.`)
 
 		const response = await generateText({
-			model: openai("gpt-4o"),
+			model: openai('gpt-4o'),
 			system: getStrategistFinalReportSystemPrompt(),
 			prompt: `Given the following report and result, generate a comprehensive report about the execution of the liquidity strategies.
 
@@ -104,31 +80,31 @@ export class StrategistAgent extends Agent {
       ${data.result}`,
 			stopWhen: stepCountIs(10),
 			onStepFinish: this.onStepFinish.bind(this),
-		});
+		})
 
-		await storeReport(response.text);
+		await storeReport(response.text)
 
 		this.eventBus.emit(`${this.name}-watcher`, {
 			result: response.text,
 			report: data.report,
-		});
+		})
 	}
 
 	async onStepFinish({ text, toolCalls, toolResults }: any) {
 		console.log(
 			`[strategist] step finished. tools called: ${
 				toolCalls.length > 0
-					? toolCalls.map((tool: any) => tool.toolName).join(", ")
-					: "none"
-			}`,
-		);
+					? toolCalls.map((tool: any) => tool.toolName).join(', ')
+					: 'none'
+			}`
+		)
 		if (text) {
 			await saveThought({
-				agent: "strategist",
+				agent: 'strategist',
 				text,
 				toolCalls,
 				toolResults,
-			});
+			})
 		}
 	}
 }

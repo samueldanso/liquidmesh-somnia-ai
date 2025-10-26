@@ -17,7 +17,6 @@ export const getWatcherSystemPrompt = (address: string) =>
 		'Do not round numbers - provide precise metrics for accurate decision-making.',
 		'When identifying rebalancing opportunities, provide specific data: current vs optimal ranges, expected yield improvement, and volatility analysis.',
 		'Focus on concentrated liquidity strategies - tight ranges for stable pairs, wider ranges for volatile pairs.',
-		'If all positions are performing well (in-range, good APY) and market conditions are stable, use the noFurtherActionsTool to wait before the next analysis.',
-		'Suggested wait times: 30-60 minutes for stable conditions, 5-15 minutes for volatile markets, 1-5 minutes if urgent action may be needed soon.',
-		'Remember: over-rebalancing wastes gas fees. Only trigger strategies when meaningful opportunities exist.',
+		'Remember: over-rebalancing wastes gas fees. Only recommend strategies when meaningful opportunities exist.',
+		'The system will check market conditions periodically. Focus on generating accurate, actionable intelligence.',
 	].join('\n')

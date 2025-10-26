@@ -90,6 +90,34 @@ export function usePoolMetrics() {
 	return query
 }
 
+// Fetch agent status
+export function useAgentStatus() {
+	const query = useQuery({
+		queryKey: ['agent-status'],
+		queryFn: async () => {
+			const response = await fetch('/api/agents/status')
+			if (!response.ok) {
+				const error = await response.json().catch(() => ({ error: 'Unknown error' }))
+				throw new Error(error.error || 'Failed to fetch agent status')
+			}
+			return await response.json()
+		},
+		refetchInterval: 10000, // Poll every 10 seconds
+		staleTime: 5000,
+		retry: 2,
+	})
+
+	useEffect(() => {
+		if (query.isError) {
+			toast.error('Failed to load agent status', {
+				description: query.error?.message || 'Unknown error',
+			})
+		}
+	}, [query.isError, query.error])
+
+	return query
+}
+
 // Calculate total TVL and APY
 export function useDashboardStats() {
 	const { data: positions = [] } = useLiquidityPositions()

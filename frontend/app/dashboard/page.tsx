@@ -1,6 +1,7 @@
 import { ErrorBoundary } from '@/components/error-boundary'
 import { StatsCards } from './_components/stats-cards'
 import { AgentActivity } from './_components/agent-activity'
+import { AgentControl } from './_components/agent-control'
 import { PositionsTable } from './_components/positions-table'
 
 export default function Dashboard() {
@@ -14,6 +15,9 @@ export default function Dashboard() {
 						AI-powered autonomous liquidity management on Somnia
 					</p>
 				</div>
+
+				{/* Agent Control */}
+				<AgentControl />
 
 				{/* Stats Overview */}
 				<StatsCards />
