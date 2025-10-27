@@ -18,3 +18,8 @@
 
 # Hardhat coverage reports
 /coverage
+
+/CONTRACTS.md
+/DEPLOYED-ADDRESSES.md
+/VERIFICATION-GUIDE.md
+/MANUAL-VERIFICATION-STEPS.md
