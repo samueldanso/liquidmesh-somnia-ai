@@ -5,6 +5,7 @@ const envSchema = z.object({
 	SUPABASE_URL: z.string(),
 	SUPABASE_KEY: z.string(),
 	PRIVATE_KEY: z.string(),
+	AGENT_PRIVATE_KEY: z.string().optional(), // Agent wallet for contract interactions
 	OPENAI_API_KEY: z.string(),
 	SOMNIA_RPC_URL: z.string().default('https://dream-rpc.somnia.network'),
 	CHAIN_ID: z.string().default('50312'),

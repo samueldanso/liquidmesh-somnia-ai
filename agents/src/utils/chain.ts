@@ -28,7 +28,7 @@ export const somniaTestnet = defineChain({
 		},
 		alternative: {
 			name: 'SocialScan',
-			url: 'https://somnia-testnet.socialscan.io',
+			url: 'https://shannon-explorer.somnia.network',
 		},
 	},
 	testnet: true,

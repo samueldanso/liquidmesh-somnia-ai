@@ -4,11 +4,6 @@ import env from '../env'
 
 /**
  * ERC20 Token ABI (minimal subset for balance queries)
- *
- * Source: Standard ERC20 interface from Ethereum
- * This is the universal ERC20 ABI - works with ANY ERC20 token on Somnia
- *
- * We only need balanceOf, decimals, and symbol for our use case
  */
 const ERC20_ABI = [
 	{
@@ -132,15 +127,18 @@ export class SomniaClient {
 export const somniaClient = new SomniaClient()
 
 /**
- * REAL Testnet Token Addresses on Somnia
- * Source: Somnia Discord (dev-chat) - provided by @emrey.somi
- *
- * USDC: Deployed by Standard Team on Somnia testnet
- * Confirmed address: 0x0ED782B8079529f7385c3eDA9fAf1EaA0DbC6a17
- *
- * Standard DEX: https://somnia-testnet.standardweb3.com/somnia-testnet/trade/SOL/USDC
- *
- * Note: These are REAL deployed contracts, not mock addresses!
+ * LiquidMesh Contract Addresses on Somnia Testnet
+ * All contracts deployed and verified on Shannon Explorer
+ */
+export const SOMNIA_CONTRACTS = {
+	WrappedSTT: '0x9e1B4FbB45F30b0628e4C406A6F4Eec1fadb54E1' as Address,
+	MockUSDC: '0x758dA18F8424f637f788a0CD0DAF8407069D380b' as Address,
+	LiquidityVault: '0x28205BB97e1BEe146E0b095D3cf62433D9bAb47d' as Address,
+	AgentExecutor: '0x5e639e2F345577514aFA0159AEdDf0A832e4139f' as Address,
+} as const
+
+/**
+ * Legacy token addresses (kept for compatibility)
  */
 export const SOMNIA_TESTNET_TOKENS = {
 	USDC: '0x0ED782B8079529f7385c3eDA9fAf1EaA0DbC6a17' as Address, // ✅ Real Standard team deployment
