@@ -1,42 +1,12 @@
-import type { HardhatUserConfig } from 'hardhat/config'
-
-import hardhatToolboxViemPlugin from '@nomicfoundation/hardhat-toolbox-viem'
-import '@nomicfoundation/hardhat-verify'
-import { configVariable } from 'hardhat/config'
+import { HardhatUserConfig } from 'hardhat/config'
+import '@nomicfoundation/hardhat-toolbox'
 
 const config: HardhatUserConfig = {
-	plugins: [hardhatToolboxViemPlugin],
-	solidity: {
-		profiles: {
-			default: {
-				version: '0.8.28',
-			},
-			production: {
-				version: '0.8.28',
-				settings: {
-					optimizer: {
-						enabled: true,
-						runs: 200,
-					},
-				},
-			},
-		},
-	},
+	solidity: '0.8.28',
 	networks: {
-		hardhatMainnet: {
-			type: 'edr-simulated',
-			chainType: 'l1',
-		},
-		hardhatOp: {
-			type: 'edr-simulated',
-			chainType: 'op',
-		},
 		somnia: {
-			type: 'http',
-			chainType: 'l1',
 			url: 'https://dream-rpc.somnia.network',
-			accounts: [configVariable('SOMNIA_PRIVATE_KEY')],
-			chainId: 50312,
+			accounts: process.env.SOMNIA_PRIVATE_KEY ? [process.env.SOMNIA_PRIVATE_KEY] : [],
 		},
 	},
 	sourcify: {
@@ -44,7 +14,7 @@ const config: HardhatUserConfig = {
 	},
 	etherscan: {
 		apiKey: {
-			somnia: 'ETHERSCAN_API_KEY', // Placeholder - Shannon Explorer doesn't need real key
+			somnia: 'empty',
 		},
 		customChains: [
 			{
