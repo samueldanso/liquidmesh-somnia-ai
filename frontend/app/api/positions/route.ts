@@ -17,7 +17,8 @@ export async function GET() {
 		}
 
 		const data = await response.json()
-		return NextResponse.json(data)
+		// Extract positions array from the response
+		return NextResponse.json(data.positions || [])
 	} catch (error) {
 		console.error('API Route Error:', error)
 		return NextResponse.json({ error: 'Failed to fetch liquidity positions' }, { status: 500 })

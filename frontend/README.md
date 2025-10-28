@@ -1,86 +1,43 @@
-# LiquidMesh - Web
+# LiquidMesh Web
 
-Web interface for LiquidMesh App.
+Somnia Testnet UI for the LiquidMesh Coordinated Liquidity Manager (CLM).
 
 ## ✨ Features
 
--   **Next.js 15** with App Router and React 19
--   **Web3 Integration** with Wagmi v2 and Privy
--   **React Query** for data fetching
--   **Somnia Network** support (Tesnet)
--   **TypeScript** for type safety
--   **Tailwind CSS** with theming and dark mode support
--   **Shadcn/ui** for a large range of fully customizable and themable components
--   **Error Boundaries** for graceful error handling
+-   Next.js 15 (App Router) + React 19
+-   Wagmi v2 + Privy wallet connect for Somnia
+-   TanStack Query for data fetching
+-   Tailwind CSS + shadcn/ui
+-   Error boundaries and loading states
 
 ## 🚀 Quick Start
 
-1. **Clone or use as template**
+```bash
+bun install
+bun dev
+```
 
-    ```bash
-    git clone https://github.com/samueldanso/web3-app-template.git
-    cd liquidmesh-somnia-ai
-    ```
+Open http://localhost:3000.
 
-2. **Install dependencies**
+### Environment
 
-    ```bash
-    bun install
-    ```
+Create `.env.local` in `frontend/`:
 
-3. **Set up environment variables**
+```bash
+NEXT_PUBLIC_PRIVY_APP_ID=your_privy_app_id
+NEXT_PUBLIC_CHAIN_ID=50312
+NEXT_PUBLIC_RPC_URL=https://dream-rpc.somnia.network
+```
 
-    ```bash
-    cp .env-example .env
-    ```
+## 🧭 App Structure
 
-    Fill in your environment variables:
+-   `/deposit` – Wrap/Mint, Approve, Deposit, Enable Automation (stepper)
+-   `/dashboard` – Agent activity feed with Shannon Explorer links
+-   `/api/agents/*` – Proxies to agents backend (`http://localhost:8000`)
 
-    - `NEXT_PUBLIC_PRIVY_APP_ID`: Get from [Privy](https://dashboard.privy.io/)
-    - `NEXT_PUBLIC_CHAIN_ID`: Use `11155111` for Sepolia or `1` for Mainnet
+## 🔗 Useful Links
 
-4. **Start development server**
-
-    ```bash
-    bun dev
-    ```
-
-5. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 🛠️ Development
-
-### Available Scripts
-
--   `bun dev` - Start development server with Turbopack
--   `bun build` - Build for production
--   `bun start` - Start production server
--   `bun lint` - Run biome lint
--   `bun format` - Run biome format
--   `bun check` - Run biome format and lint
--   `bun type-check` - Run TypeScript type checking
-
-### Web3 Integration
-
-The template includes examples of Web3 integration:
-
--   Wallet connection with RainbowKit
--   Balance fetching with custom hooks
--   Chain switching and network detection
--   Error handling for Web3 operations
-
-## 🌐 Deployment
-
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Connect your repository to [Vercel](https://vercel.com)
-3. Add your environment variables in Vercel dashboard
-4. Deploy!
-
-## 📚 Documentation
-
--   [Next.js Documentation](https://nextjs.org/docs)
--   [Wagmi Documentation](https://wagmi.sh)
--   [Privy Documentation](https://docs.privy.io/basics/react/installation)
--   [Shadcn/ui Documentation](https://ui.shadcn.com)
+-   Shannon Explorer: https://shannon-explorer.somnia.network
+-   Wagmi: https://wagmi.sh
+-   Privy: https://docs.privy.io
+-   shadcn/ui: https://ui.shadcn.com

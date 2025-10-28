@@ -173,47 +173,25 @@ sequenceDiagram
 -   **Web3 Integration:** [wagmi](https://wagmi.sh) & [viem](https://viem.sh)
 -   **Connect Wallet:** [Privy](https://docs.privy.io/)
 
-## 🚀 Getting Started
+## 🚀 Try LiquidMesh
 
-1. Clone the repository
-
-    ```bash
-    git clone https://github.com/samueldanso/liquidmesh-somnia-ai
-    cd liquidmesh-somnia-ai
-    ```
-
-2. Install dependencies
-
-    ```bash
-    bun install
-    ```
-
-3. Copy the `.env.example` to `.env` and update the variables.
-
-    ```bash
-    cp .env.example .env
-    ```
-
-4. Start the development server
-
-    ```bash
-    bun dev
-    ```
-
-## 🚀 Deploy
-
-Follow the deployment guides for [Vercel](https://nextjs.org/learn-pages-router/basics/deploying-nextjs-app/deploy).
+Visit our live demo at [liquidmeshfi.xyz](https://liquidmeshfi.xyz) to experience autonomous liquidity management on Somnia.
 
 ## 📋 Roadmap
 
 **Phase 1: Core System (Hackathon)**
 
-1. Build AgentMesh orchestration core
-2. Implement specialized agents (Watcher, Strategist, Executor)
-3. Integrate Somnia pool data and simulation engine
-4. Deliver demo dashboard + orchestrated CLM pipeline
+1. ✅ Build AgentMesh orchestration core
+2. ✅ Implement specialized agents (Watcher, Strategist, Executor)
+3. ✅ Integrate Somnia pool data and simulation engine
+4. ✅ Deliver demo dashboard + orchestrated CLM pipeline
 
-**Phase 2: Framework Evolution (Post-Hackathon)** 5. Abstract AgentMesh for general DeFi use cases 6. Developer documentation for custom agents 7. Additional agent examples (risk management, arbitrage) 8. Community SDK and tooling
+**Phase 2: Framework Evolution (Post-Hackathon)**
+
+5. Abstract AgentMesh for general DeFi use cases
+6. Developer documentation for custom agents
+7. Additional agent examples (risk management, arbitrage)
+8. Community SDK and tooling
 
 ## 🏆 Built at Somnia AI Hackathon 2025
 
@@ -229,4 +207,6 @@ Follow the deployment guides for [Vercel](https://nextjs.org/learn-pages-router/
 
 ## 🔗 Links
 
--   **Live Demo**: [LiquidMesh](https://www.liquidmeshfi.xyz/)
+-   **Live Demo**: [liquidmeshfi.xyz](https://liquidmeshfi.xyz)
+-   **Smart Contracts**: [Shannon Explorer](https://shannon-explorer.somnia.network)
+-   **Documentation**: [docs.liquidmeshfi.xyz](https://docs.liquidmeshfi.xyz)

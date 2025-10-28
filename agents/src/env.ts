@@ -13,6 +13,9 @@ const envSchema = z.object({
 	MODEL_NAME: z.string().default('gpt-4o'),
 	AUTO_START: z.string().default('false'), // Don't auto-start on deploy
 	CHECK_INTERVAL_HOURS: z.coerce.number().default(2), // Check every 2 hours
+	STRATEGY_AUTOMATION_ENABLED: z.string().default('false'),
+	STRATEGY_INTERVAL_MINUTES: z.coerce.number().default(2),
+	STRATEGY_COOLDOWN_MINUTES: z.coerce.number().default(10),
 })
 
 export const env = envSchema.parse(process.env)
