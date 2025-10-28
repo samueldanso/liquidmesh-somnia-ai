@@ -1,57 +1,209 @@
-# Sample Hardhat 3 Beta Project (`node:test` and `viem`)
+# 🏗️ LiquidMesh Smart Contracts
 
-This project showcases a Hardhat 3 Beta project using the native Node.js test runner (`node:test`) and the `viem` library for Ethereum interactions.
+**AI-Powered Concentrated Liquidity Management on Somnia**
 
-To learn more about the Hardhat 3 Beta, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3 Beta](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+Production-ready smart contracts for autonomous LP position optimization using multi-agent AI coordination.
 
-## Project Overview
+---
 
-This example project includes:
+## 📦 **Contracts Overview**
 
-- A simple Hardhat configuration file.
-- Foundry-compatible Solidity unit tests.
-- TypeScript integration tests using [`node:test`](nodejs.org/api/test.html), the new Node.js native test runner, and [`viem`](https://viem.sh/).
-- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
+| Contract             | Address                                      | Purpose                                  |
+| -------------------- | -------------------------------------------- | ---------------------------------------- |
+| `WrappedSTT.sol`     | `0x9e1B4FbB45F30b0628e4C406A6F4Eec1fadb54E1` | Wrap native STT → wSTT for DEX pairs     |
+| `MockUSDC.sol`       | `0x758dA18F8424f637f788a0CD0DAF8407069D380b` | Test USDC token (6 decimals)             |
+| `LiquidityVault.sol` | `0x28205BB97e1BEe146E0b095D3cf62433D9bAb47d` | Main vault for pair deposits & LP tokens |
+| `AgentExecutor.sol`  | `0x5e639e2F345577514aFA0159AEdDf0A832e4139f` | AI agent proposal & execution system     |
 
-## Usage
+---
 
-### Running Tests
+## 📁 **File Structure**
 
-To run all the tests in the project, execute the following command:
+```
+contracts/
+├── README.md
+├── contracts/
+│   ├── AgentExecutor.sol
+│   ├── LiquidityVault.sol
+│   ├── MockUSDC.sol
+│   └── WrappedSTT.sol
+├── scripts/
+│   └── deploy.ts
+├── hardhat.config.ts
+├── package.json
+└── tsconfig.json
+```
 
-```shell
+---
+
+## 🎯 **What This Does**
+
+### **Problem:**
+
+Managing concentrated liquidity positions is complex and requires constant monitoring.
+
+### **Solution:**
+
+AI agents automatically optimize your wSTT/USDC liquidity positions:
+
+1. **User deposits** wSTT + USDC → Receives LP tokens
+2. **AI agents monitor** market conditions 24/7
+3. **Agents propose** optimal range adjustments
+4. **User executes** or agents auto-rebalance
+5. **User earns** trading fees automatically
+6. **User withdraws** anytime (burns LP tokens)
+
+---
+
+## ⚙️ **Tech Stack**
+
+-   **Solidity:** 0.8.28
+-   **Framework:** Hardhat 2.19.0
+-   **Deployment:** ethers.js scripts
+-   **Libraries:** OpenZeppelin Contracts
+-   **Network:** Somnia Testnet (Chain ID: 50312)
+
+---
+
+## 🚀 **Quick Start**
+
+### **Prerequisites**
+
+-   Node.js 18+
+-   Somnia testnet STT for gas ([Get from faucet](https://testnet.somnia.network))
+
+### **1. Install Dependencies**
+
+```bash
+cd contracts
+bun install
+```
+
+### **2. Configure Environment**
+
+Set your private key in `.env`:
+
+```bash
+echo "SOMNIA_PRIVATE_KEY=your_private_key_here" > .env
+```
+
+### **3. Compile Contracts**
+
+```bash
+npx hardhat compile
+```
+
+### **4. Deploy to Somnia Testnet**
+
+```bash
+npx hardhat run scripts/deploy.ts --network somnia
+```
+
+---
+
+## 🔗 **Integration**
+
+For integration with frontend and agents, see the main project [INTEGRATION-GUIDE.md](../INTEGRATION-GUIDE.md).
+
+
+## 🧪 **Testing**
+
+### **Run Tests**
+
+```bash
 npx hardhat test
 ```
 
-You can also selectively run the Solidity or `node:test` tests:
+### **Test Coverage**
 
-```shell
-npx hardhat test solidity
-npx hardhat test nodejs
+```bash
+npx hardhat coverage
 ```
 
-### Make a deployment to Sepolia
+---
 
-This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
+## 🔍 **Verify on Somnia Explorer**
 
-To run the deployment to a local chain:
+All contracts are already verified! View them at:
 
-```shell
-npx hardhat ignition deploy ignition/modules/Counter.ts
+-   [WrappedSTT](https://shannon-explorer.somnia.network/address/0x9e1B4FbB45F30b0628e4C406A6F4Eec1fadb54E1#code)
+-   [MockUSDC](https://shannon-explorer.somnia.network/address/0x758dA18F8424f637f788a0CD0DAF8407069D380b#code)
+-   [LiquidityVault](https://shannon-explorer.somnia.network/address/0x28205BB97e1BEe146E0b095D3cf62433D9bAb47d#code)
+-   [AgentExecutor](https://shannon-explorer.somnia.network/address/0x5e639e2F345577514aFA0159AEdDf0A832e4139f#code)
+
+---
+
+## 🏗️ **Architecture**
+
+### **Contract Relationships**
+
+```
+User
+  │
+  ├─> WrappedSTT.deposit() → Wrap STT to wSTT
+  │
+  ├─> MockUSDC.mint() → Get test USDC
+  │
+  ├─> LiquidityVault.depositPair()
+  │     ├─ Transfers wSTT + USDC
+  │     ├─ Mints LP tokens (ERC20)
+  │     └─ Creates position
+  │
+  └─> AgentExecutor.executeProposal()
+        └─ Updates vault position range
+
+AI Agents (off-chain)
+  │
+  ├─> Monitor vault positions
+  ├─> Analyze market conditions
+  └─> AgentExecutor.proposeStrategy()
+        └─ Stores reasoning on-chain
 ```
 
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
+### **Data Flow**
 
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
-
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
-
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
+```
+1. Deposit → Event emitted
+2. Agent detects → Analyzes position
+3. Agent proposes → Stored on-chain
+4. User/agent executes → Range updated
+5. Fees accrue → Claimable anytime
+6. User withdraws → LP tokens burned
 ```
 
-After setting the variable, you can run the deployment with the Sepolia network:
+---
 
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
-```
+## 🔐 **Security Features**
+
+-   ✅ **ReentrancyGuard** on all state-changing functions
+-   ✅ **Ownable** for access control
+-   ✅ **Pausable** for emergency stops
+-   ✅ **Input validation** on all parameters
+-   ✅ **CEI pattern** (Checks-Effects-Interactions)
+-   ✅ **Agent authorization** system
+
+---
+
+## 🐛 **Troubleshooting**
+
+### **"Insufficient funds for gas"**
+
+Get more STT from [Somnia faucet](https://testnet.somnia.network)
+
+### **"SOMNIA_PRIVATE_KEY not set"**
+
+Set in `.env` file: `SOMNIA_PRIVATE_KEY=your_key_here`
+
+### **"Transaction reverted"**
+
+Check:
+
+-   Token approvals are sufficient
+-   Minimum deposit met (10 USDC)
+-   Agent is authorized (for proposals)
+
+## ⚠️ **Disclaimer**
+
+This is a **hackathon project** for Somnia AI Hackathon 2025. Not for production use.
+
+**Questions?** Check the main project [README](../README.md) or open an issue.
