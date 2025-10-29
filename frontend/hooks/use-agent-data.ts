@@ -120,15 +120,19 @@ export function useAgentStatus() {
 
 // Calculate total TVL and APY
 export function useDashboardStats() {
-	const { data: positions = [] } = useLiquidityPositions()
-	const { data: pools = [] } = usePoolMetrics()
+	const { data: positionsResp } = useLiquidityPositions()
+	const { data: poolsResp } = usePoolMetrics()
 
-	const totalTVL = positions.reduce((sum, pos) => sum + pos.liquidityUSD, 0)
+	const positions = Array.isArray(positionsResp) ? positionsResp : []
+	const pools = Array.isArray(poolsResp) ? poolsResp : []
+
+	const totalTVL = positions.reduce((sum, pos: any) => sum + (pos.liquidityUSD || 0), 0)
 	const avgAPY =
 		positions.length > 0
-			? positions.reduce((sum, pos) => sum + pos.apy, 0) / positions.length
+			? positions.reduce((sum: number, pos: any) => sum + (pos.apy || 0), 0) /
+			  positions.length
 			: 0
-	const activePositions = positions.filter((pos) => pos.inRange).length
+	const activePositions = positions.filter((pos: any) => pos.inRange).length
 
 	return {
 		totalTVL,

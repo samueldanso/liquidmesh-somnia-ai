@@ -1,7 +1,5 @@
 /**
  * DefiLlama API Client for Somnia Chain Data
- *
- * ✅ PUBLIC API - NO API KEY REQUIRED
  * Source: https://api-docs.defillama.com/
  *
  * Important: This fetches MAINNET data from Somnia (real DEX pools)

@@ -1,5 +1,8 @@
 import { tool } from 'ai'
 import { z } from 'zod'
+import { SomniaV2Adapter } from '../../adapters/somnia-v2'
+import { SOMNIA_EXCHANGE_V2, DEMO_PAIR } from '../../adapters/addresses'
+import { setLatestTxHash } from '../../utils/tx-store'
 
 export function getExecutorToolkit() {
 	return {
@@ -79,20 +82,40 @@ export function getExecutorToolkit() {
 				// Extract range from params (strategist passes newRange or range)
 				const range = parsedParams.newRange || parsedParams.range || [1.22, 1.28]
 
-				// Mock execution (replace with real Somnia tx later)
-				const result = {
-					success: true,
-					txHash: `0x${Math.random().toString(16).substring(2)}`,
-					gasUsed: 142350,
-					gasCostUSD: 0.71,
-					newPosition: {
-						range: range,
-						liquidity: 190000,
-						apy: 38.2,
-					},
-				}
+				// Real execution path (Somnia Exchange V2 adapter)
+				const adapter = new SomniaV2Adapter({ router: SOMNIA_EXCHANGE_V2.ROUTER_V02 })
 
-				console.log(`[executeTransaction] execution complete: ${result.txHash}`)
+				// Parse optional amounts from params; default small demo amounts
+				const amount0 = BigInt((parsedParams.amount0Wei as string) || '100000000000000000') // 0.1 wSTT
+				const amount1 = BigInt((parsedParams.amount1Wei as string) || '100000000') // 100 USDC (6 decimals)
+				const to = (parsedParams.to as `0x${string}`) || (DEMO_PAIR.TOKEN0 as `0x${string}`) // fallback to any address; router will transfer to 'to'
+
+				// Approvals for router
+				await adapter.ensureApprovals({
+					token: DEMO_PAIR.TOKEN0,
+					owner: to,
+					spender: SOMNIA_EXCHANGE_V2.ROUTER_V02,
+					amount: amount0,
+				})
+				await adapter.ensureApprovals({
+					token: DEMO_PAIR.TOKEN1,
+					owner: to,
+					spender: SOMNIA_EXCHANGE_V2.ROUTER_V02,
+					amount: amount1,
+				})
+
+				const { txHash } = await adapter.deposit({
+					token0: DEMO_PAIR.TOKEN0,
+					token1: DEMO_PAIR.TOKEN1,
+					amount0,
+					amount1,
+					to,
+					deadline: undefined,
+				})
+
+				const result = { success: true, txHash }
+				setLatestTxHash(txHash)
+				console.log(`[executeTransaction] execution complete: ${txHash}`)
 				return JSON.stringify(result, null, 2)
 			},
 		}),

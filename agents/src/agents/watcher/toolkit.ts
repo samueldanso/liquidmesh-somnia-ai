@@ -1,17 +1,9 @@
 import { tool } from 'ai'
 import { z } from 'zod'
 import type { Address } from 'viem'
-import {
-	getMockLiquidityPositions,
-	getMockPoolMetrics,
-	getMockWalletBalances,
-	realPoolDataProvider,
-} from '../../data'
+import { realPoolDataProvider } from '../../data'
 import { retrievePastReports } from '../../memory/db'
 import env from '../../env'
-
-// Use real data by default, fallback to mock if API fails
-const USE_REAL_DATA = true
 
 export function getWatcherToolkit(address: string) {
 	return {
@@ -55,37 +47,19 @@ export function getWatcherToolkit(address: string) {
 			}),
 			execute: async ({ poolAddress }) => {
 				console.log('======== getPoolMetrics Tool =========')
-				console.log(
-					`[getPoolMetrics] fetching pool metrics from ${
-						USE_REAL_DATA ? 'REAL DATA (DefiLlama)' : 'mock data'
-					}...`
-				)
+				console.log(`[getPoolMetrics] fetching pool metrics from REAL DATA (DefiLlama)...`)
 
 				let pools
 
-				if (USE_REAL_DATA) {
-					try {
-						// Try to get real data first
-						pools = await realPoolDataProvider.getRealPoolMetrics()
-						console.log(
-							`[getPoolMetrics] fetched ${pools.length} REAL pools from DefiLlama`
-						)
+				// Always use REAL data - no mock fallback
+				pools = await realPoolDataProvider.getRealPoolMetrics()
+				console.log(`[getPoolMetrics] fetched ${pools.length} REAL pools from DefiLlama`)
 
-						// Filter by address if provided
-						if (poolAddress) {
-							pools = pools.filter(
-								(p) => p.poolAddress.toLowerCase() === poolAddress.toLowerCase()
-							)
-						}
-					} catch (error) {
-						console.warn(
-							'[getPoolMetrics] Real data fetch failed, falling back to mock:',
-							error
-						)
-						pools = getMockPoolMetrics(poolAddress)
-					}
-				} else {
-					pools = getMockPoolMetrics(poolAddress)
+				// Filter by address if provided
+				if (poolAddress) {
+					pools = pools.filter(
+						(p) => p.poolAddress.toLowerCase() === poolAddress.toLowerCase()
+					)
 				}
 
 				const poolsArray = Array.isArray(pools) ? pools : [pools]
@@ -120,51 +94,38 @@ export function getWatcherToolkit(address: string) {
 			execute: async () => {
 				console.log('======== getWalletBalances Tool =========')
 				console.log(
-					`[getWalletBalances] fetching wallet balances for ${address} from ${
-						USE_REAL_DATA ? 'REAL DATA (Somnia RPC)' : 'mock data'
-					}...`
+					`[getWalletBalances] fetching wallet balances for ${address} from REAL DATA (Somnia RPC)...`
 				)
 
-				let balances
-				let positions = getMockLiquidityPositions() // Keep positions mock for now
+				// Always use REAL data - no mock fallback
+				const realBalances = await realPoolDataProvider.getRealWalletBalances(
+					address as Address
+				)
+				console.log(
+					`[getWalletBalances] REAL balances - STT: ${realBalances.stt}, USDC: ${realBalances.usdc}`
+				)
 
-				if (USE_REAL_DATA) {
-					try {
-						// Fetch REAL balances from Somnia testnet
-						const realBalances = await realPoolDataProvider.getRealWalletBalances(
-							address as Address
-						)
-						console.log(
-							`[getWalletBalances] REAL balances - STT: ${realBalances.stt}, USDC: ${realBalances.usdc}`
-						)
+				// Convert to our format
+				const balances = [
+					{
+						token: 'STT',
+						address: '0x0000000000000000000000000000000000000000',
+						balance: realBalances.stt,
+						balanceUSD: realBalances.stt * 1.25, // Assume $1.25 per STT
+						price: 1.25,
+					},
+					{
+						token: 'USDC',
+						address: '0x0ED782B8079529f7385c3eDA9fAf1EaA0DbC6a17',
+						balance: realBalances.usdc,
+						balanceUSD: realBalances.usdc,
+						price: 1.0,
+					},
+				]
 
-						// Convert to our format
-						balances = [
-							{
-								token: 'STT',
-								address: '0x0000000000000000000000000000000000000000',
-								balance: realBalances.stt,
-								balanceUSD: realBalances.stt * 1.25, // Assume $1.25 per STT
-								price: 1.25,
-							},
-							{
-								token: 'USDC',
-								address: '0x0ED782B8079529f7385c3eDA9fAf1EaA0DbC6a17',
-								balance: realBalances.usdc,
-								balanceUSD: realBalances.usdc,
-								price: 1.0,
-							},
-						]
-					} catch (error) {
-						console.warn(
-							'[getWalletBalances] Real data fetch failed, falling back to mock:',
-							error
-						)
-						balances = getMockWalletBalances()
-					}
-				} else {
-					balances = getMockWalletBalances()
-				}
+				// For now, positions are empty since we don't have real position data yet
+				// This will be populated when users actually deposit into our contracts
+				const positions: any[] = []
 
 				const tokenBalances = balances
 					.map(

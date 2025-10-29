@@ -1,4 +1,5 @@
 import type { WatcherAgent } from './watcher'
+import { contractClient } from '../utils/contract-interactions'
 import env from '../env'
 
 /**
@@ -85,10 +86,84 @@ export class AgentManager {
 		)
 
 		try {
+			// Run watcher agent
 			await this.watcherAgent.start(this.currentWallet)
+
+			// Check for contract interactions
+			await this.checkContractInteractions()
 		} catch (error) {
 			console.error(`[AgentManager] Error in cycle #${this.cycleCount}:`, error)
 		}
+	}
+
+	/**
+	 * Check for contract interactions and execute strategies
+	 */
+	private async checkContractInteractions(): Promise<void> {
+		if (!this.currentWallet) return
+
+		try {
+			// Get user's position
+			const position = await contractClient.getUserPosition(this.currentWallet)
+			if (!position || !position.active) {
+				console.log(`[AgentManager] No active position for ${this.currentWallet}`)
+				return
+			}
+
+			console.log(`[AgentManager] Position found: ${position.lpTokens} LP tokens`)
+
+			// Check for pending proposals
+			const pendingProposals = await contractClient.getUserPendingProposals(
+				this.currentWallet
+			)
+			if (pendingProposals.length > 0) {
+				console.log(`[AgentManager] Found ${pendingProposals.length} pending proposals`)
+
+				// Execute the first pending proposal
+				const proposal = pendingProposals[0]
+				console.log(`[AgentManager] Executing proposal: ${proposal.reasoning}`)
+
+				// Note: In a real implementation, you'd need the proposal ID
+				// For now, we'll just log it
+				console.log(
+					`[AgentManager] Would execute proposal with range: ${proposal.rangeLower}-${proposal.rangeUpper}`
+				)
+			}
+
+			// Example: Propose a new strategy if conditions are met
+			// This is where the AI would analyze market conditions and propose adjustments
+			const shouldProposeStrategy = this.shouldProposeStrategy(position)
+			if (shouldProposeStrategy) {
+				console.log(`[AgentManager] Proposing new strategy for ${this.currentWallet}`)
+
+				// Example strategy: adjust range based on current position
+				const newRangeLower = Math.max(1, Number(position.rangeLower) - 100)
+				const newRangeUpper = Number(position.rangeUpper) + 100
+
+				try {
+					await contractClient.proposeStrategy(
+						this.currentWallet,
+						newRangeLower,
+						newRangeUpper,
+						'Market volatility detected, adjusting range for optimal fees'
+					)
+				} catch (error) {
+					console.error('[AgentManager] Failed to propose strategy:', error)
+				}
+			}
+		} catch (error) {
+			console.error('[AgentManager] Error checking contract interactions:', error)
+		}
+	}
+
+	/**
+	 * Determine if we should propose a new strategy
+	 * This is where AI logic would go
+	 */
+	private shouldProposeStrategy(position: any): boolean {
+		// Simple heuristic: propose if position is older than 1 hour
+		const oneHourAgo = Date.now() - 60 * 60 * 1000
+		return Number(position.lastFeeUpdate) < oneHourAgo
 	}
 
 	/**
