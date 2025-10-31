@@ -1,26 +1,33 @@
-import { NextResponse } from 'next/server'
-
-const AGENTS_API_URL = process.env.NEXT_PUBLIC_AGENTS_API_URL || 'http://localhost:8000'
+import { env } from "@/env";
 
 export async function GET() {
-	try {
-		const response = await fetch(`${AGENTS_API_URL}/positions`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			cache: 'no-store',
-		})
+  try {
+    const response = await fetch(
+      `${env.NEXT_PUBLIC_AGENTS_API_URL}/positions`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      },
+    );
 
-		if (!response.ok) {
-			throw new Error(`Agents API error: ${response.status}`)
-		}
+    if (!response.ok) {
+      throw new Error(`Agents API error: ${response.status}`);
+    }
 
-		const data = await response.json()
-		// Extract positions array from the response
-		return NextResponse.json(data.positions || [])
-	} catch (error) {
-		console.error('API Route Error:', error)
-		return NextResponse.json({ error: 'Failed to fetch liquidity positions' }, { status: 500 })
-	}
+    const data = await response.json();
+    // Extract positions array from the response
+    return Response.json(data.positions || []);
+  } catch (error: any) {
+    console.error("API Route Error:", error);
+    return new Response(
+      JSON.stringify({ error: "Failed to fetch liquidity positions" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+  }
 }
