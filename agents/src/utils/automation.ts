@@ -1,6 +1,8 @@
 import env from '../env'
-import { executorAgent } from '../setup'
-import { getLatestTxAtMs } from './tx-store'
+import { executorAgent, walletAddress } from '../setup'
+import { getLatestTxAtMs, setLatestTxHash } from './tx-store'
+import { SomniaV2Adapter } from '../adapters/somnia-v2'
+import { SOMNIA_EXCHANGE_V2, DEMO_PAIR } from '../adapters/addresses'
 
 let timer: NodeJS.Timeout | null = null
 let enabled = false
@@ -45,17 +47,17 @@ export function startAutomation({
 			const lastAt = getLatestTxAtMs()
 			if (lastAt && Date.now() - lastAt < cooldownMs) return
 
-			await executorAgent.handleEvent(`strategist-executor`, {
-				result: JSON.stringify({
-					action: 'deposit',
-					poolAddress: 'somnia-v2:WSTT/USDC',
-					params: JSON.stringify({
-						amount0Wei: '50000000000000000',
-						amount1Wei: '50000000',
-					}),
-				}),
-				report: 'Automated periodic strategy tick',
+			// Execute adapter directly (bypass LLM) for reliability
+			const adapter = new SomniaV2Adapter({ router: SOMNIA_EXCHANGE_V2.ROUTER_V02 })
+			const { txHash } = await adapter.deposit({
+				token0: DEMO_PAIR.TOKEN0,
+				token1: DEMO_PAIR.TOKEN1,
+				amount0: BigInt('50000000000000000'), // 0.05 wSTT
+				amount1: BigInt('50000000'), // 50 USDC
+				to: walletAddress,
+				deadline: undefined,
 			})
+			setLatestTxHash(txHash)
 		} catch (e) {
 			console.error('[automation] tick error', e)
 		}

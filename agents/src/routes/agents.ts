@@ -5,7 +5,7 @@ import { createPublicClient, createWalletClient, http } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import env from '../env'
 import { somniaTestnet } from '../utils/chain'
-import { getLatestTxHash } from '../utils/tx-store'
+import { getLatestTxHash, setLatestTxHash } from '../utils/tx-store'
 import { getAutomationStatus, startAutomation, stopAutomation } from '../utils/automation'
 
 const agentsRouter = new Hono()
@@ -245,6 +245,9 @@ agentsRouter.post('/execute/deposit', async (c) => {
 			],
 			nonce: nextNonce,
 		} as any)
+
+		// persist tx hash for UI activity feed
+		setLatestTxHash(txHash)
 
 		return c.json({ success: true, txHash })
 	} catch (error: any) {
