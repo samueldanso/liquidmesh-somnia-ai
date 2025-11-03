@@ -50,14 +50,18 @@ export default function FooterSection() {
   return (
     <footer className="bg-background pt-16 pb-0 sm:pt-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        {/* Same rounded background as hero section */}
-        <section className="before:bg-muted border-e-foreground relative overflow-hidden before:absolute before:inset-1 before:h-[calc(100%-8rem)] before:rounded-2xl sm:before:inset-2 md:before:rounded-[2rem] lg:before:h-[calc(100%-14rem)]">
+        {/* Glass divider line, no rounded overlay */}
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-x-0 top-0 h-px bg-white/10 backdrop-blur-md" />
           <div className="relative mx-auto max-w-7xl px-6 py-16">
             <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
               {/* Left side - Logo and copyright */}
               <div className="space-y-6 lg:max-w-sm">
                 <Link href="/" aria-label="go home" className="block size-fit">
-                  <span className="text-xl font-bold">LiquidMesh</span>
+                  <div className="flex items-center gap-2">
+                    <img src="/icon.png" alt="LiquidMesh" className="h-6 w-6 rounded-full" />
+                    <span className="text-xl font-bold">LiquidMesh</span>
+                  </div>
                 </Link>
 
                 <p className="text-muted-foreground text-base">
