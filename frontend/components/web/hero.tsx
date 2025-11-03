@@ -28,30 +28,59 @@ export default function HeroSection() {
                 <ArrowRightIcon className="size-3" />
               </Badge>
 
-              {/* Main Headline */}
-              <TextEffect
-                preset="fade-in-blur"
-                speedSegment={0.3}
-                as="h1"
-                className="font-heading text-balance text-5xl font-semibold tracking-tighter md:text-[80px] text-left mix-blend-exclusion text-white"
-              >
-                Autonomous Liquidity. Coordinated by AI
-              </TextEffect>
+              {/* Main Headline (base + blend overlay for dynamic readability) */}
+              <div className="relative">
+                {/* Base text (visible on white background) */}
+                <TextEffect
+                  preset="fade-in-blur"
+                  speedSegment={0.3}
+                  as="h1"
+                  className="font-heading text-balance text-5xl font-semibold tracking-tighter md:text-[80px] text-left text-zinc-900"
+                >
+                  Autonomous Liquidity. Coordinated by AI
+                </TextEffect>
+                {/* Overlay text that adapts over blobs */}
+                <TextEffect
+                  preset="fade-in-blur"
+                  speedSegment={0.3}
+                  as="h1"
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 font-heading text-balance text-5xl font-semibold tracking-tighter md:text-[80px] text-left mix-blend-exclusion text-white"
+                >
+                  Autonomous Liquidity. Coordinated by AI
+                </TextEffect>
+              </div>
 
-              {/* Sub-headline */}
-              <TextEffect
-                per="line"
-                preset="fade-in-blur"
-                speedSegment={0.3}
-                delay={0.5}
-                as="p"
-                className="mt-6 max-w-2xl text-pretty text-lg text-left mix-blend-exclusion text-white"
-              >
-                LiquidMesh is a decentralized, non-custodial liquidity protocol
-                on Somnia. Coordinated AI agents autonomously manage your
-                concentrated liquidity — maximizing capital efficiency and yield
-                with zero manual work.
-              </TextEffect>
+              {/* Sub-headline (base + blend overlay) */}
+              <div className="relative">
+                <TextEffect
+                  per="line"
+                  preset="fade-in-blur"
+                  speedSegment={0.3}
+                  delay={0.5}
+                  as="p"
+                  className="mt-6 max-w-2xl text-pretty text-lg text-left text-zinc-800"
+                >
+                  LiquidMesh is a decentralized, non-custodial liquidity protocol
+                  on Somnia. Coordinated AI agents autonomously manage your
+                  concentrated liquidity — maximizing capital efficiency and yield
+                  with zero manual work.
+                </TextEffect>
+                <TextEffect
+                  per="line"
+                  preset="fade-in-blur"
+                  speedSegment={0.3}
+                  delay={0.5}
+                  as="p"
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 mt-6 max-w-2xl text-pretty text-lg text-left mix-blend-exclusion text-white"
+                >
+                  LiquidMesh is a decentralized, non-custodial liquidity protocol
+                  on Somnia. Coordinated AI agents autonomously manage your
+                  concentrated liquidity — maximizing capital efficiency and yield
+                  with zero manual work.
+                </TextEffect>
+              </div>
             </div>
           </div>
         </section>
