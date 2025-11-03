@@ -1,5 +1,6 @@
 import { Brain, Network, Shield, TrendingUp, Users, Zap } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
 
 export default function FeaturesSection() {
   return (
@@ -43,51 +44,46 @@ export default function FeaturesSection() {
                 </h2>
               </CardContent>
             </Card>
-            <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2">
-              <CardContent className="pt-6">
-                <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
-                  <Network
-                    className="m-auto h-fit w-24 text-green-600"
-                    strokeWidth={1}
-                  />
-                </div>
-                <div className="relative z-10 mt-6 space-y-2 text-center">
-                  <h2 className="group-hover:text-secondary-950 text-lg font-medium transition dark:text-white font-heading tracking-tight">
-                    Multi-Agent Orchestration
-                  </h2>
-                  <p className="text-foreground">
-                    Specialized AI agents (Watcher, Strategist, Executor)
-                    coordinate autonomously to optimize your liquidity
-                    positions.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2">
-              <CardContent className="pt-6">
-                <div className="pt-6 lg:px-6">
-                  <div className="flex items-center justify-center space-x-4">
-                    <div className="text-center">
-                      <Zap className="size-8 text-green-600 mx-auto mb-2" />
-                      <div className="text-sm font-semibold">Low Latency</div>
-                    </div>
-                    <div className="text-center">
-                      <Users className="size-8 text-green-600 mx-auto mb-2" />
-                      <div className="text-sm font-semibold">Somnia Native</div>
-                    </div>
+            <LiquidGlassCard className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2 p-6">
+              <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
+                <Network
+                  className="m-auto h-fit w-24 text-green-600"
+                  strokeWidth={1}
+                />
+              </div>
+              <div className="relative z-10 mt-6 space-y-2 text-center">
+                <h2 className="group-hover:text-secondary-950 text-lg font-medium transition dark:text-white font-heading tracking-tight">
+                  Multi-Agent Orchestration
+                </h2>
+                <p className="text-foreground">
+                  Specialized AI agents (Watcher, Strategist, Executor)
+                  coordinate autonomously to optimize your liquidity positions.
+                </p>
+              </div>
+            </LiquidGlassCard>
+            <LiquidGlassCard className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2 p-6">
+              <div className="pt-6 lg:px-6">
+                <div className="flex items-center justify-center space-x-4">
+                  <div className="text-center">
+                    <Zap className="size-8 text-green-600 mx-auto mb-2" />
+                    <div className="text-sm font-semibold">Low Latency</div>
+                  </div>
+                  <div className="text-center">
+                    <Users className="size-8 text-green-600 mx-auto mb-2" />
+                    <div className="text-sm font-semibold">Somnia Native</div>
                   </div>
                 </div>
-                <div className="relative z-10 mt-14 space-y-2 text-center">
-                  <h2 className="text-lg font-medium transition font-heading tracking-tight">
-                    Somnia Optimized
-                  </h2>
-                  <p className="text-foreground">
-                    Built specifically for Somnia's low-latency execution and
-                    integrated with Somnia DEXes for optimal performance.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+              <div className="relative z-10 mt-14 space-y-2 text-center">
+                <h2 className="text-lg font-medium transition font-heading tracking-tight">
+                  Somnia Optimized
+                </h2>
+                <p className="text-foreground">
+                  Built specifically for Somnia's low-latency execution and
+                  integrated with Somnia DEXes for optimal performance.
+                </p>
+              </div>
+            </LiquidGlassCard>
             <Card className="card variant-outlined relative col-span-full overflow-hidden lg:col-span-3">
               <CardContent className="grid pt-6 sm:grid-cols-2">
                 <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">

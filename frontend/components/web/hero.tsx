@@ -2,6 +2,7 @@
 
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { Badge } from "@/components/ui/badge";
+import { LavaLamp } from "@/components/ui/fluid-blob";
 import { TextEffect } from "@/components/ui/text-effect";
 import { HeroHeader } from "@/components/web/header";
 
@@ -11,6 +12,10 @@ export default function HeroSection() {
       <HeroHeader />
       <main className="overflow-hidden [--color-primary-foreground:var(--color-white)] [--color-primary:var(--color-green-600)]">
         <section className="before:bg-muted border-e-foreground relative overflow-hidden before:absolute before:inset-1 before:h-[calc(100%-8rem)] before:rounded-2xl sm:before:inset-2 md:before:rounded-[2rem] lg:before:h-[calc(100%-14rem)]">
+          {/* Liquid blobs background */}
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <LavaLamp />
+          </div>
           <div className="relative mx-auto max-w-7xl px-6 pb-20 pt-48 lg:pt-64">
             <div className="relative z-10 max-w-4xl text-left">
               {/* Badge/CTA Button */}
