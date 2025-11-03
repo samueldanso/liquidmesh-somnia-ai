@@ -61,10 +61,10 @@ export default function HeroSection() {
                   as="p"
                   className="mt-6 max-w-2xl text-pretty text-lg text-left text-zinc-800"
                 >
-                  LiquidMesh is a decentralized, non-custodial liquidity protocol
-                  on Somnia. Coordinated AI agents autonomously manage your
-                  concentrated liquidity — maximizing capital efficiency and yield
-                  with zero manual work.
+                  LiquidMesh is a decentralized, non-custodial liquidity
+                  protocol on Somnia. Coordinated AI agents autonomously manage
+                  your concentrated liquidity — maximizing capital efficiency
+                  and yield with zero manual work.
                 </TextEffect>
                 <TextEffect
                   per="line"
@@ -75,10 +75,10 @@ export default function HeroSection() {
                   aria-hidden
                   className="pointer-events-none absolute inset-0 mt-6 max-w-2xl text-pretty text-lg text-left mix-blend-exclusion text-white"
                 >
-                  LiquidMesh is a decentralized, non-custodial liquidity protocol
-                  on Somnia. Coordinated AI agents autonomously manage your
-                  concentrated liquidity — maximizing capital efficiency and yield
-                  with zero manual work.
+                  LiquidMesh is a decentralized, non-custodial liquidity
+                  protocol on Somnia. Coordinated AI agents autonomously manage
+                  your concentrated liquidity — maximizing capital efficiency
+                  and yield with zero manual work.
                 </TextEffect>
               </div>
             </div>
