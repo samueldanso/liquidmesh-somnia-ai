@@ -5,17 +5,20 @@ import Footer from '@/components/web/footer'
 import HeroFluidDemo from '@/components/web/hero-fluid-demo'
 import HowItWorksSection from '@/components/web/how-it-works'
 import LogoCloud from '@/components/web/logo-cloud'
+import HeroMorphic from '@/components/web/hero-morphic'
+import CtaMorphic from '@/components/web/cta-morphic'
 
 export default function Home() {
 	return (
 		<>
-			{/* Fluid blob hero (includes its own site header) */}
-			<HeroFluidDemo />
+			{/* Morphic Dreams exact demo hero */}
+			<HeroMorphic />
 			<LogoCloud />
 			<FeaturesSection />
 			<HowItWorksSection />
 			<FaqsSection />
-			<CallToAction />
+			{/* Morphic Dreams exact demo CTA */}
+			<CtaMorphic />
 			<Footer />
 		</>
 	)
