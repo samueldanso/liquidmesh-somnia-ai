@@ -46,11 +46,12 @@ export const HeroHeader = () => {
 								className="flex items-center space-x-2"
 							>
 								<Image
-									src="/icon.svg"
+									src="/icon.png"
 									alt="LiquidMesh"
 									width={24}
 									height={24}
 									priority
+									className="rounded-full"
 								/>
 								<span className="text-xl font-bold">LiquidMesh</span>
 							</Link>
