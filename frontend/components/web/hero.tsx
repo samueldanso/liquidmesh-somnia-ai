@@ -11,7 +11,8 @@ export default function HeroSection() {
     <>
       <HeroHeader />
       <main className="overflow-hidden [--color-primary-foreground:var(--color-white)] [--color-primary:var(--color-green-600)]">
-        <section className="before:bg-muted border-e-foreground relative overflow-hidden before:absolute before:inset-1 before:h-[calc(100%-8rem)] before:rounded-2xl sm:before:inset-2 md:before:rounded-[2rem] lg:before:h-[calc(100%-14rem)]">
+        {/* Remove prior gray rounded overlay; keep a clean canvas for the fluid blobs */}
+        <section className="relative overflow-hidden">
           {/* Liquid blobs background */}
           <div className="pointer-events-none absolute inset-0 -z-10">
             <LavaLamp />
@@ -32,7 +33,7 @@ export default function HeroSection() {
                 preset="fade-in-blur"
                 speedSegment={0.3}
                 as="h1"
-                className="font-heading text-balance text-5xl font-semibold tracking-tighter md:text-[80px] text-left"
+                className="font-heading text-balance text-5xl font-semibold tracking-tighter md:text-[80px] text-left mix-blend-exclusion text-white"
               >
                 Autonomous Liquidity. Coordinated by AI
               </TextEffect>
@@ -44,7 +45,7 @@ export default function HeroSection() {
                 speedSegment={0.3}
                 delay={0.5}
                 as="p"
-                className="mt-6 max-w-2xl text-pretty text-lg text-left"
+                className="mt-6 max-w-2xl text-pretty text-lg text-left mix-blend-exclusion text-white"
               >
                 LiquidMesh is a decentralized, non-custodial liquidity protocol
                 on Somnia. Coordinated AI agents autonomously manage your
