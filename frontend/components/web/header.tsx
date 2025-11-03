@@ -1,6 +1,7 @@
 'use client'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 
@@ -17,7 +18,7 @@ export const HeroHeader = () => {
 	return (
 		<header>
 			<nav data-state={menuState && 'active'} className="relative z-20 w-full px-2">
-				<div className="mx-auto mt-4 max-w-7xl px-6 lg:px-12">
+				<div className="mx-auto mt-4 max-w-7xl px-6 lg:px-12 rounded-2xl border border-border/50 bg-background/40 supports-[backdrop-filter]:bg-background/20 backdrop-blur-md shadow-sm">
 					<div className="relative flex flex-wrap items-center justify-between gap-6 py-2.5 lg:gap-0 lg:py-3">
 						<div className="flex w-full justify-between lg:w-auto">
 							<Link
@@ -25,6 +26,13 @@ export const HeroHeader = () => {
 								aria-label="home"
 								className="flex items-center space-x-2"
 							>
+								<Image
+									src="/icon.svg"
+									alt="LiquidMesh"
+									width={24}
+									height={24}
+									priority
+								/>
 								<span className="text-xl font-bold">LiquidMesh</span>
 							</Link>
 
@@ -74,8 +82,9 @@ export const HeroHeader = () => {
 							<div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
 								<Button
 									asChild
-									size="default"
-									className="bg-brand-primary hover:bg-brand-primary/90 text-brand-primary-foreground text-base font-medium px-6 py-2 rounded-md"
+									size="lg"
+									variant="gradient"
+									className="px-6 py-2 rounded-md"
 								>
 									<Link href="/dashboard">
 										<span className="text-base font-medium">Launch App</span>

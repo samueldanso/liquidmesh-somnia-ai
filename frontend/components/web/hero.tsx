@@ -2,6 +2,8 @@
 
 import { LavaLamp } from '@/components/ui/fluid-blob'
 import { HeroHeader } from '@/components/web/header'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export default function Hero() {
 	return (
@@ -13,11 +15,24 @@ export default function Hero() {
 				</div>
 				<div className="flex flex-col items-center justify-center text-center px-4">
 					<h1 className="text-6xl md:text-8xl font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
-						AI Orchestration Layer
+						Autonomous Liquidity, Unlocked
 					</h1>
 					<p className="mt-4 text-lg md:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed">
-						Autonomous liquidity management for maximum capital efficiency.
+						LiquidMesh is a decentralized, non-custodial liquidity orchestration
+						protocol powered by a multi-agent framework — enabling LPs to achieve
+						maximum capital efficiency and superior risk-adjusted yields across Somnia
+						and beyond.
 					</p>
+					<div className="mt-6">
+						<Button
+							asChild
+							size="lg"
+							variant="gradient"
+							className="px-8 py-3 rounded-md"
+						>
+							<Link href="/dashboard">Launch AgentMesh</Link>
+						</Button>
+					</div>
 				</div>
 			</section>
 		</>

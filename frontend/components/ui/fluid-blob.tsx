@@ -90,7 +90,10 @@ void main() {
         vec3 p = cameraPos + ray * t;
         vec3 normal = getNormal(p);
         float fresnel = pow(1.0 + dot(ray, normal), 3.0);
-        color = vec3(fresnel);
+        // Base grayscale shading with a very subtle blue tint to match theme
+        float shade = fresnel;
+        vec3 tint = vec3(0.96, 0.98, 1.0); // tiny blue bias
+        color = vec3(shade) * tint;
         gl_FragColor = vec4(color, 1.0);
     } else {
         gl_FragColor = vec4(1.0);
