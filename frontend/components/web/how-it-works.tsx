@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
 
 export default function HowItWorksSection() {
   return (
@@ -28,9 +29,9 @@ export default function HowItWorksSection() {
           </div>
           <div className="mt-16 space-y-12">
             <div className="grid items-center gap-6 sm:grid-cols-5">
-              <Card className="p-6 sm:col-span-2">
+              <LiquidGlassCard className="p-6 sm:col-span-2">
                 <WatcherIllustration />
-              </Card>
+              </LiquidGlassCard>
               <div className="max-w-md sm:col-span-3">
                 <h3 className="font-heading text-foreground text-lg font-semibold tracking-tight">
                   01 Watcher Agent
@@ -44,9 +45,9 @@ export default function HowItWorksSection() {
             </div>
 
             <div className="grid items-center gap-6 sm:grid-cols-5">
-              <Card className="overflow-hidden p-6 sm:col-span-2 sm:overflow-clip">
+              <LiquidGlassCard className="overflow-hidden p-6 sm:col-span-2 sm:overflow-clip">
                 <StrategistIllustration />
-              </Card>
+              </LiquidGlassCard>
               <div className="max-w-md sm:col-span-3">
                 <h3 className="font-heading text-foreground text-lg font-semibold tracking-tight">
                   02 Strategist Agent
@@ -60,11 +61,11 @@ export default function HowItWorksSection() {
             </div>
 
             <div className="grid items-center gap-6 sm:grid-cols-5">
-              <Card className="overflow-hidden px-6 sm:col-span-2">
+              <LiquidGlassCard className="overflow-hidden px-6 sm:col-span-2">
                 <div className="mask-b-from-75% -mx-2 -mt-2 px-2 pt-6">
                   <ExecutorIllustration />
                 </div>
-              </Card>
+              </LiquidGlassCard>
               <div className="max-w-md sm:col-span-3">
                 <h3 className="font-heading text-foreground text-lg font-semibold tracking-tight">
                   03 Executor Agent
@@ -84,7 +85,7 @@ export default function HowItWorksSection() {
 
 const WatcherIllustration = () => {
   return (
-    <Card aria-hidden className="aspect-video p-4">
+    <LiquidGlassCard aria-hidden className="aspect-video p-4">
       <div className="mb-0.5 text-sm font-semibold">Watcher Agent</div>
       <div className="mb-4 flex gap-2 text-sm">
         <span className="text-muted-foreground">Monitoring Pool Metrics</span>
@@ -109,14 +110,14 @@ const WatcherIllustration = () => {
       <div className="text-muted-foreground text-sm font-medium">
         Real-time Data Collection
       </div>
-    </Card>
+    </LiquidGlassCard>
   );
 };
 
 const StrategistIllustration = () => {
   return (
     <div aria-hidden className="relative">
-      <Card className="aspect-video w-4/5 p-3 transition-transform duration-200 ease-in-out group-hover:-rotate-3">
+      <LiquidGlassCard className="aspect-video w-4/5 p-3 transition-transform duration-200 ease-in-out group-hover:-rotate-3">
         <div className="mb-3 grid grid-cols-[auto_1fr] gap-2">
           <div className="bg-background size-6 rounded-full border p-0.5 shadow shadow-zinc-950/5">
             <Brain className="size-4 text-green-600" />
@@ -130,25 +131,25 @@ const StrategistIllustration = () => {
         </div>
 
         <div className="ml-8 space-y-2">
-          <div className="bg-foreground/10 h-2 rounded-full"></div>
-          <div className="bg-foreground/10 h-2 w-3/5 rounded-full"></div>
-          <div className="bg-foreground/10 h-2 w-1/2 rounded-full"></div>
+          <div className="h-2 rounded-full bg-white/10"></div>
+          <div className="h-2 w-3/5 rounded-full bg-white/10"></div>
+          <div className="h-2 w-1/2 rounded-full bg-white/10"></div>
         </div>
 
         <Brain className="ml-8 mt-3 size-5 text-green-600" />
-      </Card>
-      <Card className="aspect-3/5 absolute right-0 top-4 flex w-2/5 translate-y-4 p-2 transition-transform duration-200 ease-in-out group-hover:rotate-3">
+      </LiquidGlassCard>
+      <LiquidGlassCard className="aspect-3/5 absolute right-0 top-4 flex w-2/5 translate-y-4 p-2 transition-transform duration-200 ease-in-out group-hover:rotate-3">
         <div className="bg-foreground/5 m-auto flex size-10 rounded-full">
           <Network className="fill-foreground/50 stroke-foreground/50 m-auto size-4" />
         </div>
-      </Card>
+      </LiquidGlassCard>
     </div>
   );
 };
 
 const ExecutorIllustration = () => {
   return (
-    <Card
+    <LiquidGlassCard
       aria-hidden
       className="aspect-video p-4 transition-transform duration-200 group-hover:translate-y-0"
     >
@@ -158,7 +159,7 @@ const ExecutorIllustration = () => {
           Executing transactions on Somnia for optimal liquidity management
         </p>
       </div>
-      <div className="bg-foreground/5 -mx-3 -mb-3 mt-3 space-y-3 rounded-lg p-3">
+      <div className="bg-white/5 -mx-3 -mb-3 mt-3 space-y-3 rounded-lg p-3 backdrop-blur">
         <div className="text-muted-foreground text-sm">
           Transaction Status: Success
         </div>
@@ -186,6 +187,6 @@ const ExecutorIllustration = () => {
           </Button>
         </div>
       </div>
-    </Card>
+    </LiquidGlassCard>
   );
 };

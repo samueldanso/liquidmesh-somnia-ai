@@ -20,8 +20,8 @@ export default function FeaturesSection() {
         </div>
         <div className="relative">
           <div className="relative z-10 grid grid-cols-6 gap-3">
-            <Card className="relative col-span-full flex overflow-hidden lg:col-span-2">
-              <CardContent className="relative m-auto size-fit pt-6">
+            <LiquidGlassCard className="relative col-span-full overflow-hidden lg:col-span-2 p-6 flex">
+              <div className="relative m-auto size-fit pt-6">
                 <div className="relative flex h-24 w-56 items-center">
                   <svg
                     className="text-muted absolute inset-0 size-full"
@@ -42,8 +42,8 @@ export default function FeaturesSection() {
                 <h2 className="mt-6 text-center text-3xl font-semibold font-heading tracking-tight">
                   Maximum Capital Efficiency
                 </h2>
-              </CardContent>
-            </Card>
+              </div>
+            </LiquidGlassCard>
             <LiquidGlassCard className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2 p-6">
               <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
                 <Network
@@ -84,8 +84,8 @@ export default function FeaturesSection() {
                 </p>
               </div>
             </LiquidGlassCard>
-            <Card className="card variant-outlined relative col-span-full overflow-hidden lg:col-span-3">
-              <CardContent className="grid pt-6 sm:grid-cols-2">
+            <LiquidGlassCard className="relative col-span-full overflow-hidden lg:col-span-3 p-6">
+              <div className="grid pt-0 sm:grid-cols-2">
                 <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
                   <div className="relative flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
                     <Brain
@@ -121,10 +121,10 @@ export default function FeaturesSection() {
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-            <Card className="card variant-outlined relative col-span-full overflow-hidden lg:col-span-3">
-              <CardContent className="grid h-full pt-6 sm:grid-cols-2">
+              </div>
+            </LiquidGlassCard>
+            <LiquidGlassCard className="relative col-span-full overflow-hidden lg:col-span-3 p-6">
+              <div className="grid h-full sm:grid-cols-2">
                 <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
                   <div className="relative flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
                     <Shield
@@ -177,8 +177,8 @@ export default function FeaturesSection() {
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </LiquidGlassCard>
           </div>
         </div>
       </div>
