@@ -119,7 +119,7 @@ const StrategistIllustration = () => {
       <LiquidGlassCard className="aspect-video w-4/5 p-3 transition-transform duration-200 ease-in-out group-hover:-rotate-3">
         <div className="mb-3 grid grid-cols-[auto_1fr] gap-2">
           <div className="bg-background size-6 rounded-full border p-0.5 shadow shadow-zinc-950/5">
-            <Brain className="size-4 text-green-600" />
+            <Brain className="size-4 text-primary" />
           </div>
           <div className="flex items-center gap-1">
             <span className="text-muted-foreground line-clamp-1 text-sm font-medium">
@@ -135,7 +135,7 @@ const StrategistIllustration = () => {
           <div className="h-2 w-1/2 rounded-full bg-white/10"></div>
         </div>
 
-        <Brain className="ml-8 mt-3 size-5 text-green-600" />
+        <Brain className="ml-8 mt-3 size-5 text-primary" />
       </LiquidGlassCard>
       <LiquidGlassCard className="aspect-3/5 absolute right-0 top-4 flex w-2/5 translate-y-4 p-2 transition-transform duration-200 ease-in-out group-hover:rotate-3">
         <div className="bg-foreground/5 m-auto flex size-10 rounded-full">
@@ -153,7 +153,7 @@ const ExecutorIllustration = () => {
       className="aspect-video p-4 transition-transform duration-200 group-hover:translate-y-0"
     >
       <div className="w-fit">
-        <Zap className="size-3.5 fill-green-300 stroke-green-300" />
+        <Zap className="size-3.5 text-primary" />
         <p className="mt-2 line-clamp-2 text-sm">
           Executing transactions on Somnia for optimal liquidity management
         </p>
@@ -181,7 +181,7 @@ const ExecutorIllustration = () => {
             </Button>
           </div>
 
-          <Button size="icon" className="size-7 rounded-2xl bg-green-600">
+          <Button size="icon" className="size-7 rounded-2xl bg-primary">
             <Zap strokeWidth={3} />
           </Button>
         </div>

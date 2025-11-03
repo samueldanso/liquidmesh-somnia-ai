@@ -53,7 +53,16 @@ export const HeroHeader = () => {
 									priority
 									className="rounded-full"
 								/>
-								<span className="text-xl font-bold">LiquidMesh</span>
+								<span
+									className={cn(
+										'text-xl font-bold transition-colors',
+										isScrolled
+											? 'text-foreground'
+											: 'text-neutral-900/80 dark:text-neutral-100'
+									)}
+								>
+									LiquidMesh
+								</span>
 							</Link>
 
 							<button

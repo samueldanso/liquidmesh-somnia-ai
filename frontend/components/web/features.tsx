@@ -46,7 +46,7 @@ export default function FeaturesSection() {
             <LiquidGlassCard className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2 p-6">
               <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
                 <Network
-                  className="m-auto h-fit w-24 text-green-600"
+                  className="m-auto h-fit w-24 text-primary"
                   strokeWidth={1}
                 />
               </div>
@@ -64,11 +64,11 @@ export default function FeaturesSection() {
               <div className="pt-6 lg:px-6">
                 <div className="flex items-center justify-center space-x-4">
                   <div className="text-center">
-                    <Zap className="size-8 text-green-600 mx-auto mb-2" />
+                    <Zap className="size-8 text-primary mx-auto mb-2" />
                     <div className="text-sm font-semibold">Low Latency</div>
                   </div>
                   <div className="text-center">
-                    <Users className="size-8 text-green-600 mx-auto mb-2" />
+                    <Users className="size-8 text-primary mx-auto mb-2" />
                     <div className="text-sm font-semibold">Somnia Native</div>
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export default function FeaturesSection() {
                 <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
                   <div className="relative flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
                     <Brain
-                      className="m-auto size-5 text-green-600"
+                      className="m-auto size-5 text-primary"
                       strokeWidth={1}
                     />
                   </div>
@@ -111,11 +111,11 @@ export default function FeaturesSection() {
                   </div>
                   <div className="flex items-center justify-center space-x-4 mt-8">
                     <div className="text-center">
-                      <Brain className="size-8 text-green-600 mx-auto mb-2" />
+                      <Brain className="size-8 text-primary mx-auto mb-2" />
                       <div className="text-sm font-semibold">AI</div>
                     </div>
                     <div className="text-center">
-                      <Zap className="size-8 text-green-600 mx-auto mb-2" />
+                      <Zap className="size-8 text-primary mx-auto mb-2" />
                       <div className="text-sm font-semibold">Auto</div>
                     </div>
                   </div>
@@ -127,7 +127,7 @@ export default function FeaturesSection() {
                 <div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
                   <div className="relative flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
                     <Shield
-                      className="m-auto size-6 text-green-600"
+                      className="m-auto size-6 text-primary"
                       strokeWidth={1}
                     />
                   </div>
@@ -145,32 +145,32 @@ export default function FeaturesSection() {
                 <div className="before:bg-(--color-border) relative mt-6 before:absolute before:inset-0 before:mx-auto before:w-px sm:-my-6 sm:-mr-6">
                   <div className="relative flex h-full flex-col justify-center space-y-6 py-6">
                     <div className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2">
-                      <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm bg-green-50 text-green-700">
+                      <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm bg-primary/10 text-primary">
                         On-Chain
                       </span>
                       <div className="ring-background size-7 ring-4">
-                        <div className="size-full rounded-full bg-green-100 flex items-center justify-center">
-                          <Shield className="size-4 text-green-600" />
+                        <div className="size-full rounded-full bg-primary/15 flex items-center justify-center">
+                          <Shield className="size-4 text-primary" />
                         </div>
                       </div>
                     </div>
                     <div className="relative ml-[calc(50%-1rem)] flex items-center gap-2">
                       <div className="ring-background size-8 ring-4">
-                        <div className="size-full rounded-full bg-green-100 flex items-center justify-center">
-                          <TrendingUp className="size-4 text-green-600" />
+                        <div className="size-full rounded-full bg-primary/15 flex items-center justify-center">
+                          <TrendingUp className="size-4 text-primary" />
                         </div>
                       </div>
-                      <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm bg-green-50 text-green-700">
+                      <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm bg-primary/10 text-primary">
                         Transparent
                       </span>
                     </div>
                     <div className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2">
-                      <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm bg-green-50 text-green-700">
+                      <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm bg-primary/10 text-primary">
                         No Limits
                       </span>
                       <div className="ring-background size-7 ring-4">
-                        <div className="size-full rounded-full bg-green-100 flex items-center justify-center">
-                          <Zap className="size-4 text-green-600" />
+                        <div className="size-full rounded-full bg-primary/15 flex items-center justify-center">
+                          <Zap className="size-4 text-primary" />
                         </div>
                       </div>
                     </div>
