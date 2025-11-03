@@ -20,7 +20,7 @@ export default function LogoCloud() {
 	]
 
 	return (
-		<section className="bg-background py-16 md:py-24">
+		<section className="bg-background pt-16 md:pt-24 pb-8 md:pb-12">
 			<div className="group relative m-auto max-w-7xl px-6">
 				<div className="flex flex-col items-center">
 					<div className="mb-8 text-center">

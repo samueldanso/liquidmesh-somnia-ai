@@ -13,23 +13,22 @@ export function CallToAction() {
             <LavaLamp />
           </div>
           <div className="flex flex-col items-center justify-center text-center px-4">
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
-              Join the Autonomous Liquidity Revolution
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
+              Join the Revolution
             </h1>
-            <p className="mt-4 text-lg md:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed">
-              Experience AI-powered liquidity management on Somnia. Multi-agent
-              orchestration that maximizes your capital efficiency.
+            <p className="mt-4 text-lg lg:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed">
+              Experience AI-powered concentrated liquidity management on Somnia.
             </p>
-          </div>
-          <div className="mt-10 lg:mt-12">
-            <Link href="/dashboard">
+            <div className="mt-6">
               <Button
+                asChild
                 size="lg"
-                className="text-base font-medium px-8 py-3 rounded-full bg-foreground text-background hover:bg-foreground/90"
+                variant="gradient"
+                className="px-8 py-3 rounded-md text-base font-medium"
               >
-                Start earning
+                <Link href="/dashboard">Launch App</Link>
               </Button>
-            </Link>
+            </div>
           </div>
         </div>
       </div>
