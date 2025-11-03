@@ -1,40 +1,41 @@
-'use client'
+"use client";
 
-import { LavaLamp } from '@/components/ui/fluid-blob'
-import { HeroHeader } from '@/components/web/header'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { LavaLamp } from "@/components/ui/fluid-blob";
+import { HeroHeader } from "@/components/web/header";
 
 export default function Hero() {
-	return (
-		<>
-			<HeroHeader />
-			<section className="relative flex h-screen w-full items-center justify-center overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 -z-10">
-					<LavaLamp />
-				</div>
-				<div className="flex flex-col items-center justify-center text-center px-4">
-					<h1 className="text-6xl md:text-8xl font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
-						Autonomous Liquidity, Unlocked
-					</h1>
-					<p className="mt-4 text-lg md:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed">
-						LiquidMesh is a decentralized, non-custodial liquidity orchestration
-						protocol powered by a multi-agent framework — enabling LPs to achieve
-						maximum capital efficiency and superior risk-adjusted yields across Somnia
-						and beyond.
-					</p>
-					<div className="mt-6">
-						<Button
-							asChild
-							size="lg"
-							variant="gradient"
-							className="px-8 py-3 rounded-md"
-						>
-							<Link href="/dashboard">Launch AgentMesh</Link>
-						</Button>
-					</div>
-				</div>
-			</section>
-		</>
-	)
+  return (
+    <>
+      <HeroHeader />
+      <section className="relative flex h-screen w-full items-center justify-center overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <LavaLamp />
+        </div>
+        <div className="flex flex-col items-center justify-center text-center px-4">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
+            Autonomous <br />
+            Liquidity Unlocked
+          </h1>
+          <p className="mt-4 text-base md:text-lg lg:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed">
+            LiquidMesh is a decentralized, non-custodial liquidity orchestration
+            protocol powered by a multi-agent framework — enabling LPs to
+            achieve maximum capital efficiency and superior risk-adjusted yields
+            across Somnia and beyond.
+          </p>
+          <div className="mt-6">
+            <Button
+              asChild
+              size="lg"
+              variant="gradient"
+              className="px-8 py-3 rounded-md"
+            >
+              <Link href="/dashboard">Launch AgentMesh</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }
