@@ -31,9 +31,7 @@ export default function Hero() {
               variant="gradient"
               className="px-8 py-3 rounded-md text-base font-medium"
             >
-              <Link href="/dashboard" target="_blank" rel="noopener noreferrer">
-                Launch AgentMesh
-              </Link>
+              <Link href="/app">Launch AgentMesh</Link>
             </Button>
           </div>
         </div>

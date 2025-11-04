@@ -40,14 +40,22 @@ export function AgentActivity() {
   const { data: latestTx } = useQuery({
     queryKey: ["latest-adapter-tx"],
     queryFn: async () => {
-      const res = await fetch("/api/agents/tx/latest");
-      const json = await res.json();
-      return json?.txHash as string | null;
+      try {
+        const res = await fetch("/api/agents/tx/latest");
+        if (!res.ok) return null;
+        const json = await res.json();
+        const txHash = json?.txHash;
+        // Ensure it's a string before returning
+        return typeof txHash === 'string' && txHash.length > 0 ? txHash : null;
+      } catch (error) {
+        console.error('Failed to fetch latest tx:', error);
+        return null;
+      }
     },
     refetchInterval: 5000,
   });
 
-  const recentThoughts = thoughts.slice(0, 10);
+  const recentThoughts = Array.isArray(thoughts) ? thoughts.slice(0, 10) : [];
 
   return (
     <Card>
@@ -60,7 +68,7 @@ export function AgentActivity() {
       <CardContent>
         <div className="space-y-3">
           {/* Latest Adapter Transaction */}
-          {latestTx && (
+          {latestTx && typeof latestTx === 'string' && latestTx.length > 0 && (
             <div className="flex items-start gap-4 p-3 border rounded-lg bg-green-50 dark:bg-green-950/20">
               <Zap className="size-4 mt-0.5 text-green-500" />
               <div className="flex-1 space-y-1">
