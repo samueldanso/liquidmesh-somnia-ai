@@ -1,7 +1,7 @@
 import env from '../env'
 import { executorAgent, walletAddress } from '../setup'
 import { getLatestTxAtMs, setLatestTxHash } from './tx-store'
-import { SomniaV2Adapter } from '../adapters/somnia-v2'
+import { SomniaV2Adapter } from '../adapters/somnia-exchangev2'
 import { SOMNIA_EXCHANGE_V2, DEMO_PAIR } from '../adapters/addresses'
 
 let timer: NodeJS.Timeout | null = null

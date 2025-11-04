@@ -118,7 +118,7 @@ export const HeroHeader = () => {
 										isScrolled && 'lg:hidden'
 									)}
 								>
-									<Link href="/dashboard">
+									<Link href="/dashboard" target="_blank" rel="noopener noreferrer">
 										<span>Launch App</span>
 									</Link>
 								</Button>
@@ -131,7 +131,7 @@ export const HeroHeader = () => {
 										isScrolled ? 'lg:inline-flex' : 'hidden'
 									)}
 								>
-									<Link href="/dashboard">
+									<Link href="/dashboard" target="_blank" rel="noopener noreferrer">
 										<span>Launch App</span>
 									</Link>
 								</Button>
