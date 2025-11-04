@@ -31,5 +31,14 @@ export const WalletConnect = () => {
     );
   }
 
-  return <Button onClick={login}>Connect Wallet</Button>;
+  return (
+    <Button
+      onClick={login}
+      variant="gradient"
+      size="lg"
+      className="px-8 py-3 rounded-md text-base font-medium"
+    >
+      Connect Wallet
+    </Button>
+  );
 };

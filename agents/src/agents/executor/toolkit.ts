@@ -1,6 +1,6 @@
 import { tool } from 'ai'
 import { z } from 'zod'
-import { SomniaV2Adapter } from '../../adapters/somnia-v2'
+import { SomniaV2Adapter } from '../../adapters/somnia-exchangev2'
 import { SOMNIA_EXCHANGE_V2, DEMO_PAIR } from '../../adapters/addresses'
 import { setLatestTxHash } from '../../utils/tx-store'
 

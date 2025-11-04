@@ -18,12 +18,6 @@ export default function AppHeader() {
           >
             Dashboard
           </Link>
-          <Link
-            href="/deposit"
-            className="relative text-muted-foreground hover:text-foreground transition-colors font-medium"
-          >
-            Liquidity
-          </Link>
         </div>
 
         <div className="flex items-center gap-2">

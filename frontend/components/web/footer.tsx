@@ -59,7 +59,11 @@ export default function FooterSection() {
               <div className="space-y-6 lg:max-w-sm">
                 <Link href="/" aria-label="go home" className="block size-fit">
                   <div className="flex items-center gap-2">
-                    <img src="/icon.png" alt="LiquidMesh" className="h-6 w-6 rounded-full" />
+                    <img
+                      src="/icon.png"
+                      alt="LiquidMesh"
+                      className="h-6 w-6 rounded-full"
+                    />
                     <span className="text-xl font-bold">LiquidMesh</span>
                   </div>
                 </Link>

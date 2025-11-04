@@ -1,12 +1,15 @@
 "use client";
 
+import { Info } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useOnboardingStore } from "@/lib/stores/onboarding-store";
 
 export function AutomationStep() {
   const router = useRouter();
@@ -14,6 +17,7 @@ export function AutomationStep() {
   const [interval, setInterval] = useState(2);
   const [cooldown, setCooldown] = useState(10);
   const [loading, setLoading] = useState(false);
+  const { setAutomationCompleted } = useOnboardingStore();
 
   useEffect(() => {
     fetch("/api/agents/automation/status")
@@ -42,6 +46,7 @@ export function AutomationStep() {
       const j = await res.json();
       if (j.success !== false) {
         setEnabled(true);
+        setAutomationCompleted(true);
         toast.success("Automation enabled");
         router.push("/dashboard");
       } else {
@@ -67,9 +72,19 @@ export function AutomationStep() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Enable Automation</CardTitle>
+        <CardTitle>Activate AI Automation</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-6">
+        <Alert>
+          <Info className="size-4" />
+          <AlertDescription>
+            Enable AI agents to autonomously manage your liquidity position. The
+            agents will continuously monitor market conditions, optimize your
+            range positions, and execute rebalancing strategies to maximize your
+            yield. This is the key feature that makes LiquidMesh powerful!
+          </AlertDescription>
+        </Alert>
+
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1">
             <Label htmlFor="interval">Interval (minutes)</Label>
@@ -79,7 +94,11 @@ export function AutomationStep() {
               value={interval}
               onChange={(e) => setInterval(Number(e.target.value))}
               min={1}
+              disabled={enabled || loading}
             />
+            <p className="text-xs text-muted-foreground">
+              How often agents check for opportunities
+            </p>
           </div>
           <div className="space-y-1">
             <Label htmlFor="cooldown">Cooldown (minutes)</Label>
@@ -89,14 +108,24 @@ export function AutomationStep() {
               value={cooldown}
               onChange={(e) => setCooldown(Number(e.target.value))}
               min={1}
+              disabled={enabled || loading}
             />
+            <p className="text-xs text-muted-foreground">
+              Minimum time between strategy executions
+            </p>
           </div>
         </div>
 
         <div className="flex gap-2">
           {!enabled ? (
-            <Button onClick={onStart} disabled={loading} className="flex-1">
-              {loading ? "Enabling…" : "Enable Automation"}
+            <Button
+              onClick={onStart}
+              disabled={loading}
+              variant="gradient"
+              size="lg"
+              className="flex-1 px-8 py-3 rounded-md text-base font-medium"
+            >
+              {loading ? "Activating…" : "Activate Automation"}
             </Button>
           ) : (
             <Button
