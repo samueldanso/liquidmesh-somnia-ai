@@ -1,335 +1,213 @@
-'use client'
+"use client";
 
-import { CheckCircle, Info, Loader2 } from 'lucide-react'
-import { useEffect } from 'react'
-import { toast } from 'sonner'
-import { parseUnits } from 'viem'
+import { CheckCircle, Info, Loader2 } from "lucide-react";
+import { useEffect } from "react";
+import { toast } from "sonner";
+import { parseUnits } from "viem";
 import {
-	useAccount,
-	useReadContract,
-	useWaitForTransactionReceipt,
-	useWriteContract,
-} from 'wagmi'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { MOCK_USDC_ABI, WRAPPED_STT_ABI } from '@/lib/abis'
-import { CONTRACTS } from '@/lib/contracts'
-import { useOnboardingStore } from '@/lib/stores/onboarding-store'
+  useAccount,
+  useReadContract,
+  useWaitForTransactionReceipt,
+  useWriteContract,
+} from "wagmi";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { MOCK_USDC_ABI, WRAPPED_STT_ABI } from "@/lib/abis";
+import { CONTRACTS } from "@/lib/contracts";
+import { useOnboardingStore } from "@/lib/stores/onboarding-store";
 
 export function PrepareTokensStep() {
-	const { address, isConnected } = useAccount()
+  const { address, isConnected } = useAccount();
 
-	const {
-		wsttAmount,
-		usdcAmount,
-		setWsttAmount,
-		setUsdcAmount,
-		setWrapCompleted,
-		setMintCompleted,
-		setApproveWSTTCompleted,
-		setApproveUSDCCompleted,
-		setCurrentStep,
-		wrapCompleted,
-		mintCompleted,
-		approveWSTTCompleted,
-		approveUSDCCompleted,
-	} = useOnboardingStore()
+  const {
+    wsttAmount,
+    usdcAmount,
+    setWsttAmount,
+    setUsdcAmount,
+    setWrapCompleted,
+    setMintCompleted,
+    setCurrentStep,
+    wrapCompleted,
+    mintCompleted,
+  } = useOnboardingStore();
 
-	// Contract interactions
-	const { writeContract: writeWrappedSTT, data: wrapHash } =
-		useWriteContract()
-	const { writeContract: writeMockUSDC, data: mintHash } = useWriteContract()
-	const { writeContract: writeApproveWSTT, data: approveWSTTHash } =
-		useWriteContract()
-	const { writeContract: writeApproveUSDC, data: approveUSDCHash } =
-		useWriteContract()
+  // Contract interactions
+  const { writeContract: writeWrappedSTT, data: wrapHash } = useWriteContract();
+  const { writeContract: writeMockUSDC, data: mintHash } = useWriteContract();
 
-	// Transaction receipts
-	const { isLoading: isWrapping, isSuccess: isWrapSuccess } =
-		useWaitForTransactionReceipt({
-			hash: wrapHash,
-		})
-	const { isLoading: isMinting, isSuccess: isMintSuccess } =
-		useWaitForTransactionReceipt({
-			hash: mintHash,
-		})
-	const {
-		isLoading: isApprovingWSTT,
-		isSuccess: isApproveWSTTSuccess,
-	} = useWaitForTransactionReceipt({
-		hash: approveWSTTHash,
-	})
-	const {
-		isLoading: isApprovingUSDC,
-		isSuccess: isApproveUSDCSuccess,
-	} = useWaitForTransactionReceipt({
-		hash: approveUSDCHash,
-	})
+  // Transaction receipts
+  const { isLoading: isWrapping, isSuccess: isWrapSuccess } =
+    useWaitForTransactionReceipt({
+      hash: wrapHash,
+    });
+  const { isLoading: isMinting, isSuccess: isMintSuccess } =
+    useWaitForTransactionReceipt({
+      hash: mintHash,
+    });
 
-	// Update store when transactions complete
-	useEffect(() => {
-		if (isWrapSuccess) setWrapCompleted(true)
-	}, [isWrapSuccess, setWrapCompleted])
+  // Update store when transactions complete
+  useEffect(() => {
+    if (isWrapSuccess) setWrapCompleted(true);
+  }, [isWrapSuccess, setWrapCompleted]);
 
-	useEffect(() => {
-		if (isMintSuccess) setMintCompleted(true)
-	}, [isMintSuccess, setMintCompleted])
+  useEffect(() => {
+    if (isMintSuccess) setMintCompleted(true);
+  }, [isMintSuccess, setMintCompleted]);
 
-	useEffect(() => {
-		if (isApproveWSTTSuccess) setApproveWSTTCompleted(true)
-	}, [isApproveWSTTSuccess, setApproveWSTTCompleted])
+  const handleWrapSTT = async () => {
+    if (!address || !wsttAmount) return;
 
-	useEffect(() => {
-		if (isApproveUSDCSuccess) setApproveUSDCCompleted(true)
-	}, [isApproveUSDCSuccess, setApproveUSDCCompleted])
+    try {
+      const amount = parseUnits(wsttAmount, 18);
+      await writeWrappedSTT({
+        address: CONTRACTS.WrappedSTT,
+        abi: WRAPPED_STT_ABI,
+        functionName: "deposit",
+        value: amount,
+      });
+      toast.success("STT wrapping initiated");
+    } catch (error) {
+      toast.error("Failed to wrap STT");
+      console.error("Wrap STT error:", error);
+    }
+  };
 
-	const handleWrapSTT = async () => {
-		if (!address || !wsttAmount) return
+  const handleMintUSDC = async () => {
+    if (!address || !usdcAmount) return;
 
-		try {
-			const amount = parseUnits(wsttAmount, 18)
-			await writeWrappedSTT({
-				address: CONTRACTS.WrappedSTT,
-				abi: WRAPPED_STT_ABI,
-				functionName: 'deposit',
-				value: amount,
-			})
-			toast.success('STT wrapping initiated')
-		} catch (error) {
-			toast.error('Failed to wrap STT')
-			console.error('Wrap STT error:', error)
-		}
-	}
+    try {
+      const amount = parseUnits(usdcAmount, 6);
+      await writeMockUSDC({
+        address: CONTRACTS.MockUSDC,
+        abi: MOCK_USDC_ABI,
+        functionName: "mint",
+        args: [address, amount],
+      });
+      toast.success("USDC minting initiated");
+    } catch (error) {
+      toast.error("Failed to mint USDC");
+      console.error("Mint USDC error:", error);
+    }
+  };
 
-	const handleMintUSDC = async () => {
-		if (!address || !usdcAmount) return
 
-		try {
-			const amount = parseUnits(usdcAmount, 6)
-			await writeMockUSDC({
-				address: CONTRACTS.MockUSDC,
-				abi: MOCK_USDC_ABI,
-				functionName: 'mint',
-				args: [address, amount],
-			})
-			toast.success('USDC minting initiated')
-		} catch (error) {
-			toast.error('Failed to mint USDC')
-			console.error('Mint USDC error:', error)
-		}
-	}
+  const canContinue = wrapCompleted && mintCompleted && wsttAmount && usdcAmount;
 
-	const handleApproveWSTT = async () => {
-		if (!address || !wsttAmount) return
+  const handleContinue = () => {
+    if (canContinue) {
+      setCurrentStep(2);
+    }
+  };
 
-		try {
-			const amount = parseUnits(wsttAmount, 18)
-			await writeApproveWSTT({
-				address: CONTRACTS.WrappedSTT,
-				abi: WRAPPED_STT_ABI,
-				functionName: 'approve',
-				args: [CONTRACTS.LiquidityVault, amount],
-			})
-			toast.success('wSTT approval initiated')
-		} catch (error) {
-			toast.error('Failed to approve wSTT')
-			console.error('Approve wSTT error:', error)
-		}
-	}
+  if (!isConnected) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Prepare Tokens</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Alert>
+            <AlertDescription>
+              Please connect your wallet to prepare tokens
+            </AlertDescription>
+          </Alert>
+        </CardContent>
+      </Card>
+    );
+  }
 
-	const handleApproveUSDC = async () => {
-		if (!address || !usdcAmount) return
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Prepare Your Tokens</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <Alert>
+          <Info className="size-4" />
+          <AlertDescription>
+            Before depositing, you need to prepare your tokens. Wrap STT to
+            wSTT and mint test USDC. Token approvals will be handled automatically when you deposit.
+          </AlertDescription>
+        </Alert>
 
-		try {
-			const amount = parseUnits(usdcAmount, 6)
-			await writeApproveUSDC({
-				address: CONTRACTS.MockUSDC,
-				abi: MOCK_USDC_ABI,
-				functionName: 'approve',
-				args: [CONTRACTS.LiquidityVault, amount],
-			})
-			toast.success('USDC approval initiated')
-		} catch (error) {
-			toast.error('Failed to approve USDC')
-			console.error('Approve USDC error:', error)
-		}
-	}
+        {/* Wrap STT */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="wstt-amount">Wrap STT to wSTT</Label>
+            {wrapCompleted && <CheckCircle className="size-4 text-green-600" />}
+          </div>
+          <div className="flex gap-2">
+            <Input
+              id="wstt-amount"
+              type="number"
+              placeholder="0.0"
+              value={wsttAmount}
+              onChange={(e) => setWsttAmount(e.target.value)}
+              disabled={isWrapping || wrapCompleted}
+            />
+            <Button
+              onClick={handleWrapSTT}
+              disabled={isWrapping || !wsttAmount || wrapCompleted}
+              size="sm"
+              variant="outline"
+            >
+              {isWrapping ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : wrapCompleted ? (
+                <CheckCircle className="size-4" />
+              ) : (
+                "Wrap"
+              )}
+            </Button>
+          </div>
+        </div>
 
-	const canContinue =
-		approveWSTTCompleted && approveUSDCCompleted && wsttAmount && usdcAmount
+        {/* Mint USDC */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="usdc-amount">Mint Test USDC</Label>
+            {mintCompleted && <CheckCircle className="size-4 text-green-600" />}
+          </div>
+          <div className="flex gap-2">
+            <Input
+              id="usdc-amount"
+              type="number"
+              placeholder="0.0"
+              value={usdcAmount}
+              onChange={(e) => setUsdcAmount(e.target.value)}
+              disabled={isMinting || mintCompleted}
+            />
+            <Button
+              onClick={handleMintUSDC}
+              disabled={isMinting || !usdcAmount || mintCompleted}
+              size="sm"
+              variant="outline"
+            >
+              {isMinting ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : mintCompleted ? (
+                <CheckCircle className="size-4" />
+              ) : (
+                "Mint"
+              )}
+            </Button>
+          </div>
+        </div>
 
-	const handleContinue = () => {
-		if (canContinue) {
-			setCurrentStep(2)
-		}
-	}
-
-	if (!isConnected) {
-		return (
-			<Card>
-				<CardHeader>
-					<CardTitle>Prepare Tokens</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<Alert>
-						<AlertDescription>
-							Please connect your wallet to prepare tokens
-						</AlertDescription>
-					</Alert>
-				</CardContent>
-			</Card>
-		)
-	}
-
-	return (
-		<Card>
-			<CardHeader>
-				<CardTitle>Prepare Your Tokens</CardTitle>
-			</CardHeader>
-			<CardContent className="space-y-6">
-				<Alert>
-					<Info className="size-4" />
-					<AlertDescription>
-						Before depositing, you need to prepare your tokens. Wrap STT to
-						wSTT, mint test USDC, and approve both tokens for the vault.
-					</AlertDescription>
-				</Alert>
-
-				{/* Wrap STT */}
-				<div className="space-y-2">
-					<div className="flex items-center justify-between">
-						<Label htmlFor="wstt-amount">Wrap STT to wSTT</Label>
-						{wrapCompleted && (
-							<CheckCircle className="size-4 text-green-600" />
-						)}
-					</div>
-					<div className="flex gap-2">
-						<Input
-							id="wstt-amount"
-							type="number"
-							placeholder="0.0"
-							value={wsttAmount}
-							onChange={(e) => setWsttAmount(e.target.value)}
-							disabled={isWrapping || wrapCompleted}
-						/>
-						<Button
-							onClick={handleWrapSTT}
-							disabled={isWrapping || !wsttAmount || wrapCompleted}
-							size="sm"
-							variant="outline"
-						>
-							{isWrapping ? (
-								<Loader2 className="size-4 animate-spin" />
-							) : wrapCompleted ? (
-								<CheckCircle className="size-4" />
-							) : (
-								'Wrap'
-							)}
-						</Button>
-					</div>
-				</div>
-
-				{/* Mint USDC */}
-				<div className="space-y-2">
-					<div className="flex items-center justify-between">
-						<Label htmlFor="usdc-amount">Mint Test USDC</Label>
-						{mintCompleted && (
-							<CheckCircle className="size-4 text-green-600" />
-						)}
-					</div>
-					<div className="flex gap-2">
-						<Input
-							id="usdc-amount"
-							type="number"
-							placeholder="0.0"
-							value={usdcAmount}
-							onChange={(e) => setUsdcAmount(e.target.value)}
-							disabled={isMinting || mintCompleted}
-						/>
-						<Button
-							onClick={handleMintUSDC}
-							disabled={isMinting || !usdcAmount || mintCompleted}
-							size="sm"
-							variant="outline"
-						>
-							{isMinting ? (
-								<Loader2 className="size-4 animate-spin" />
-							) : mintCompleted ? (
-								<CheckCircle className="size-4" />
-							) : (
-								'Mint'
-							)}
-						</Button>
-					</div>
-				</div>
-
-				{/* Approve Tokens */}
-				<div className="space-y-3">
-					<Label>Approve Tokens for Vault</Label>
-					<div className="grid grid-cols-2 gap-2">
-						<Button
-							onClick={handleApproveWSTT}
-							disabled={
-								isApprovingWSTT ||
-								!wsttAmount ||
-								!wrapCompleted ||
-								approveWSTTCompleted
-							}
-							size="sm"
-							variant="outline"
-							className="flex-1"
-						>
-							{isApprovingWSTT ? (
-								<Loader2 className="size-4 animate-spin" />
-							) : approveWSTTCompleted ? (
-								<>
-									<CheckCircle className="size-4 mr-1" />
-									Approved
-								</>
-							) : (
-								'Approve wSTT'
-							)}
-						</Button>
-						<Button
-							onClick={handleApproveUSDC}
-							disabled={
-								isApprovingUSDC ||
-								!usdcAmount ||
-								!mintCompleted ||
-								approveUSDCCompleted
-							}
-							size="sm"
-							variant="outline"
-							className="flex-1"
-						>
-							{isApprovingUSDC ? (
-								<Loader2 className="size-4 animate-spin" />
-							) : approveUSDCCompleted ? (
-								<>
-									<CheckCircle className="size-4 mr-1" />
-									Approved
-								</>
-							) : (
-								'Approve USDC'
-							)}
-						</Button>
-					</div>
-				</div>
-
-				{/* Continue Button */}
-				<Button
-					onClick={handleContinue}
-					disabled={!canContinue}
-					variant="gradient"
-					size="lg"
-					className="w-full px-8 py-3 rounded-md text-base font-medium"
-				>
-					Continue to Deposit
-				</Button>
-			</CardContent>
-		</Card>
-	)
+        {/* Continue Button */}
+        <Button
+          onClick={handleContinue}
+          disabled={!canContinue}
+          variant="gradient"
+          size="lg"
+          className="w-full px-8 py-3 rounded-md text-base font-medium"
+        >
+          Continue to Deposit
+        </Button>
+      </CardContent>
+    </Card>
+  );
 }

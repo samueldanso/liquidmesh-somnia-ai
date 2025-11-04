@@ -181,7 +181,10 @@ const ExecutorIllustration = () => {
             </Button>
           </div>
 
-          <Button size="icon" className="size-7 rounded-2xl bg-gradient-to-r from-[#34A4FF] via-[#6D6BFF] to-[#A855FF] hover:brightness-110">
+          <Button
+            size="icon"
+            className="size-7 rounded-2xl bg-gradient-to-r from-[#34A4FF] via-[#6D6BFF] to-[#A855FF] hover:brightness-110"
+          >
             <Zap strokeWidth={3} className="text-white" />
           </Button>
         </div>
