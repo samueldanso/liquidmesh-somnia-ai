@@ -2,13 +2,13 @@
   "title": "Docs",
   "pages": [
     "index",
-    "introduction",
-    "how-it-works",
-    "user-guide",
+    "what-is-liquidmesh",
     "problem-solution",
-    "architecture",
+    "key-features",
+    "how-it-works",
+    "getting-started",
+    "contracts",
     "adapters",
-    "api",
-    "contracts"
+    "api"
   ]
 }
