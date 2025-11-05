@@ -18,13 +18,12 @@ export const WalletConnect = () => {
 	}
 
 	// If authenticated and user exists, show connected state
-	if (authenticated && user) {
+  if (authenticated && user) {
+    const address = typeof user.wallet?.address === 'string' ? user.wallet.address : null
 		return (
 			<span className="flex items-center gap-x-2 font-medium">
 				<span className="hidden md:block">
-					{user.wallet?.address
-						? `${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)}`
-						: 'Connected'}
+          {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Connected'}
 				</span>
 
 				<button onClick={handleDisconnect} type="button" className="cursor-pointer">
