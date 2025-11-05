@@ -1,18 +1,9 @@
-import Link from 'next/link';
-
-export default function HomePage() {
+export default function Page() {
   return (
-    <main className="flex flex-1 flex-col justify-center text-center">
-      <h1 className="mb-4 text-2xl font-bold">Hello World</h1>
-      <p className="text-fd-muted-foreground">
-        You can open{' '}
-        <Link
-          href="/docs"
-          className="text-fd-foreground font-semibold underline"
-        >
-          /docs
-        </Link>{' '}
-        and see the documentation.
+    <main className="flex flex-1 flex-col justify-center text-center p-8">
+      <h1 className="mb-4 text-2xl font-bold">LiquidMesh Docs</h1>
+      <p className="text-muted-foreground">
+        Visit the /docs section to get started.
       </p>
     </main>
   );

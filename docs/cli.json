@@ -1,0 +1,4 @@
+{
+  "$schema": "https://unpkg.com/fumadocs-mdx/cli/schema.json",
+  "mdx": true
+}

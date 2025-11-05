@@ -352,7 +352,7 @@ See `contracts/README.md` for compile/deploy steps.
 
 ## API Documentation
 
-### Frontend → Next.js API Routes 
+### Frontend → Next.js API Routes
 
 -   `GET /api/thoughts` → agents `/thoughts`
 -   `GET /api/thoughts/[agent]` → agents `/thoughts/:agent`
@@ -409,3 +409,4 @@ See `contracts/README.md` for compile/deploy steps.
 
 -   **Live Demo**: [liquidmeshfi.xyz](https://liquidmeshfi.xyz)
 -   **Documentation**: [docs.liquidmeshfi.xyz](https://docs.liquidmeshfi.xyz)
+-   **Docs (Local)**: `cd docs && bun install && bun run dev`

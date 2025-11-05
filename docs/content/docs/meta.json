@@ -1,0 +1,14 @@
+{
+  "title": "Docs",
+  "pages": [
+    "index",
+    "introduction",
+    "how-it-works",
+    "user-guide",
+    "problem-solution",
+    "architecture",
+    "adapters",
+    "api",
+    "contracts"
+  ]
+}
