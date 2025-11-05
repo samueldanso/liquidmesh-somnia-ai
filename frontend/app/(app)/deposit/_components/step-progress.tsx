@@ -10,7 +10,7 @@ interface Step {
 }
 
 const steps: Step[] = [
-  { id: 1, title: "Prepare Tokens" },
+  { id: 1, title: "Faucet" },
   { id: 2, title: "Deposit" },
   { id: 3, title: "Activate" },
 ];

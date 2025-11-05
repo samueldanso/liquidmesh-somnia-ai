@@ -286,6 +286,18 @@ export function DepositStep() {
           <Info className="size-4" />
           <AlertDescription>
             Deposit your prepared tokens into the liquidity vault. Token approvals will be handled automatically when you click "Deposit Liquidity". The vault will manage your liquidity position and optimize it using AI agents.
+            <br />
+            <span className="text-xs text-muted-foreground">
+              LiquidityVault {" "}
+              <a
+                className="underline"
+                href={`https://shannon-explorer.somnia.network/address/${CONTRACTS.LiquidityVault}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {CONTRACTS.LiquidityVault}
+              </a>
+            </span>
           </AlertDescription>
         </Alert>
 

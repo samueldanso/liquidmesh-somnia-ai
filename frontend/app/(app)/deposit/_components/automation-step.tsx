@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useOnboardingStore } from "@/lib/stores/onboarding-store";
+import { CONTRACTS } from "@/lib/contracts";
 
 export function AutomationStep() {
   const router = useRouter();
@@ -82,6 +83,18 @@ export function AutomationStep() {
             agents will continuously monitor market conditions, optimize your
             range positions, and execute rebalancing strategies to maximize your
             yield. This is the key feature that makes LiquidMesh powerful!
+            <br />
+            <span className="text-xs text-muted-foreground">
+              Agent Executor {" "}
+              <a
+                className="underline"
+                href={`https://shannon-explorer.somia.network/address/${CONTRACTS.AgentExecutor}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {CONTRACTS.AgentExecutor}
+              </a>
+            </span>
           </AlertDescription>
         </Alert>
 

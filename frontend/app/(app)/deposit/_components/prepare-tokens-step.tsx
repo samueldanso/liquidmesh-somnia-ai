@@ -122,7 +122,7 @@ export function PrepareTokensStep() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Faucet · Prepare Your Tokens</CardTitle>
+        <CardTitle>Prepare Your Tokens</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <Alert>

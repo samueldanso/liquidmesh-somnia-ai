@@ -20,7 +20,7 @@ export function DashboardRouteGuard() {
   });
 
   useEffect(() => {
-    if (!isConnected) return; // Wallet connect flow handles this elsewhere
+    if (!isConnected || !address) return; // wait for a real address
     if (isLoading) return;
 
     if (position) {
@@ -31,10 +31,10 @@ export function DashboardRouteGuard() {
     } else {
       router.replace("/deposit");
     }
-  }, [isConnected, isLoading, position, router]);
+  }, [isConnected, address, isLoading, position, router]);
 
   // Minimal placeholder to avoid content flash while checking
-  if (!isConnected || isLoading) {
+  if (!isConnected || !address || isLoading) {
     return (
       <div className="flex items-center justify-center py-8">
         <Skeleton className="h-6 w-40" />
