@@ -11,7 +11,7 @@ const menuItems = [
 	{ name: 'Features', href: '#features' },
 	{ name: 'How It Works', href: '#how-it-works' },
 	{ name: 'FAQ', href: '#faqs' },
-	{ name: 'Docs', href: '/docs' },
+	{ name: 'Docs', href: 'https://docs.liquidmeshfi.xyz' },
 ]
 
 export const HeroHeader = () => {

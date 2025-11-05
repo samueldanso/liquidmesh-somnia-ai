@@ -6,7 +6,7 @@ const links = [
     items: [
       {
         title: "Twitter / X",
-        href: "https://x.com/liquidmesh_somnia",
+        href: "https://x.com/liquidmesh_fi",
         target: "_blank",
         rel: "noopener noreferrer",
       },
@@ -17,7 +17,7 @@ const links = [
     items: [
       {
         title: "Docs",
-        href: "/docs",
+        href: "https://docs.liquidmeshfi.xyz",
         target: "_blank",
         rel: "noopener noreferrer",
       },
