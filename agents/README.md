@@ -7,39 +7,78 @@
 -   ✅ **EventBus** - Agent communication
 -   ✅ **Base Agent** class - Common agent interface
 -   ✅ **Memory System** - Supabase for thought persistence
--   ✅ **Mock Data** - Pool metrics, balances, positions for testing //will reppace with somnia Dexes and pools
+-   ✅ **Data Integrations** - DefiLlama metrics, Somnia RPC balances, positions
 
 ### Three Specialized Agents
 
 1. **Watcher Agent** - Monitors liquidity pools, generates market intelligence reports
 2. **Strategist Agent** - Analyzes reports, generates optimal rebalancing strategies
-3. **Executor Agent** - Executes strategies (mock tx for demo)
+3. **Executor Agent** - Executes strategies
+
+### DEX Integrations (Adapters)
+
+-   ✅ Somnia Exchange V2 (router-based) — implemented in `src/adapters/somnia-exchangev2.ts`
+    -   Uses Uniswap V2-style router for add/remove liquidity
+    -   Testnet Router: configured in code; tokens: wSTT/USDC
+-   ⏳ Somnex V3 (concentrated liquidity) — stub in `src/adapters/somnex-v3.ts`
+    -   Awaits factory/position manager addresses on Somnia Testnet
+-   ⏳ QuickSwap V3 — stub in `src/adapters/quickswap-v3.ts`
+    -   Interface compatible with position manager; to be wired when endpoints are available
+
+### File Structure
+
+```
+agents/
+├── src/
+│   ├── adapters/            # DEX adapters (somnia-exchangev2, somnex-v3 stub, quickswap-v3 stub)
+│   ├── agents/              # watcher/, strategist/, executor/
+│   ├── comms/               # event-bus
+│   ├── memory/              # supabase client & persistence
+│   ├── routes/              # /thoughts, /positions, /agents/* HTTP endpoints
+│   ├── env.ts               # typed environment loader
+│   ├── setup.ts             # initialization & exports
+│   ├── app.ts               # Hono server setup
+│   └── index.ts             # Entry point
+├── package.json
+└── README.md
+
+# Render config lives at repo root: ./render.yaml
+```
 
 ### API Layer
 
 -   **Hono** server with CORS
 -   **GET /thoughts** - All agent thoughts
 -   **GET /thoughts/:agent** - Specific agent thoughts
--   **GET /positions** - Mock liquidity positions
--   **GET /positions/pools** - Mock pool metrics
+-   **GET /positions** - Liquidity positions
+-   **GET /positions/pools** - Pool metrics
 
 ## ⚙️ Configuration
 
 ### Environment Variables
 
-```env
+````env
 # Required
-OPENAI_API_KEY=sk-...              # Your OpenAI API key
-SUPABASE_URL=https://...           # Supabase project URL
-SUPABASE_KEY=your-anon-key         # Supabase anon key
-PRIVATE_KEY=0x...                  # Wallet private key
+OPENAI_API_KEY=sk-...                   # OpenAI for agent reasoning
+SUPABASE_URL=https://<project>.supabase.co
+SUPABASE_KEY=your-anon-key
+PRIVATE_KEY=0x...                        # Executor wallet (fallback)
 
-# Optional
-PORT=8000                          # API server port (default: 8000)
-AUTO_START=false                   # Auto-start on deploy (default: false)
-CHECK_INTERVAL_HOURS=2             # Check interval in hours (default: 2)
-MODEL_NAME=gpt-4o                  # OpenAI model (default: gpt-4o)
-```
+# Optional / Network
+SOMNIA_RPC_URL=https://dream-rpc.somnia.network
+CHAIN_ID=50312
+CHAIN_NAME=somnia-testnet
+
+# Server
+PORT=8000
+AUTO_START=false                         # Start loop on boot
+CHECK_INTERVAL_HOURS=2                   # Periodic cycle hours
+MODEL_NAME=gpt-4o
+
+# Strategy loop (automation endpoints)
+STRATEGY_AUTOMATION_ENABLED=false
+STRATEGY_INTERVAL_MINUTES=2
+STRATEGY_COOLDOWN_MINUTES=10
 
 ## 🚀 Quick Start
 
@@ -91,7 +130,7 @@ AS $$
   ORDER BY similarity DESC
   LIMIT match_count;
 $$;
-```
+````
 
 ### 2. Install Dependencies & Configure
 
@@ -116,6 +155,14 @@ bun run dev
 ```
 
 **Note:** By default, agents won't auto-start. Use the API to control them.
+
+## ☁️ Deploy (Render)
+
+-   Runtime: Bun
+-   Root Directory: `agents`
+-   Build: `bun install`
+-   Start: `bun start`
+-   Configure the environment variables above in the Render dashboard (render.yaml included for convenience).
 
 ## 🎮 Agent Control System
 
@@ -155,62 +202,10 @@ GET /agents/status
 ```
 Watcher → Strategist → Executor → Strategist → Watcher
    ↓          ↓           ↓              ↓
-  Mock      AI          Mock       Store Report
-  Data    Decision       TX          + Wait
+  Data     AI          TX          Store Report
 
 When stable: noFurtherActionsTool → Wait (configurable) → Restart
 ```
-
-### Periodic Execution
-
-The agents run **autonomously** with fixed intervals (inspired by Monarch Lend's architecture):
-
--   **Fixed Interval:** Checks every 2 hours by default (configurable via `CHECK_INTERVAL_HOURS`)
--   **Predictable Costs:** ~12 checks/day = ~$1.80/day per wallet with gpt-4o
--   **Production-Ready:** Simple, reliable, no AI confusion about timing
--   **Gas-Efficient:** Prevents unnecessary rebalancing with reasonable check frequency
-
-**Why Fixed Intervals?**
-
--   ✅ Predictable OpenAI costs
--   ✅ No AI confusion about wait times
--   ✅ Industry standard (used by Monarch, Yearn, etc.)
--   ✅ Easy to debug and monitor
-
-## 🏗️ File Structure
-
-```
-src/
-├── agents/
-│   ├── agent.ts              # Base agent class
-│   ├── index.ts              # Agent registration
-│   ├── watcher/              # Market monitoring
-│   ├── strategist/           # Strategy decisions
-│   └── executor/             # TX execution
-├── system-prompts/           # AI behavior definitions
-├── comms/
-│   └── event-bus.ts          # Inter-agent messaging
-├── memory/
-│   └── db.ts                 # Supabase persistence
-├── data/
-│   ├── types.ts              # Data interfaces
-│   └── mock-pool-data.ts     # Mock DEX data
-├── routes/                   # HTTP API endpoints
-├── app.ts                    # Hono server
-├── setup.ts                  # Agent initialization
-└── index.ts                  # Entry point
-```
-
-## 🎯 Next Steps
-
-### For Demo
-
--   ✅ Agents communicate via EventBus
--   ✅ AI reasoning visible in console
--   ✅ API endpoints working
--   ⏳ Connect to frontend
--   ⏳ Add real Somnia RPC (optional)
--   ⏳ Real transaction execution (optional)
 
 ### Testing
 
@@ -221,13 +216,25 @@ bun run typecheck
 curl http://localhost:8000
 curl http://localhost:8000/thoughts
 curl http://localhost:8000/positions
+curl http://localhost:8000/positions/pools
+
+# Agents lifecycle
+curl -X GET http://localhost:8000/agents/status
+curl -X POST http://localhost:8000/agents/start
+curl -X POST http://localhost:8000/agents/stop
+
+# Start for a specific wallet
+curl -X POST http://localhost:8000/agents/start/0xYourWalletAddress
+
+# Latest adapter tx hash (for UI activity)
+curl -X GET http://localhost:8000/agents/tx/latest
+
+# Automation controls
+curl -X GET http://localhost:8000/agents/automation/status
+curl -X POST http://localhost:8000/agents/automation/start \
+  -H "content-type: application/json" \
+  -d '{"intervalMinutes":2, "cooldownMinutes":10}'
+curl -X POST http://localhost:8000/agents/automation/stop
 ```
-
-## 🔗 Resources
-
--   Somnia Docs: https://docs.somnia.network
--   Vercel AI SDK: https://sdk.vercel.ai
-
----
 
 **Built for Somnia AI Hackathon 2025 🚀**
