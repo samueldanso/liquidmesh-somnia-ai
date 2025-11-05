@@ -122,14 +122,39 @@ export function PrepareTokensStep() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Prepare Your Tokens</CardTitle>
+        <CardTitle>Faucet · Prepare Your Tokens</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <Alert>
           <Info className="size-4" />
           <AlertDescription>
-            Before depositing, you need to prepare your tokens. Wrap STT to
-            wSTT and mint test USDC. Token approvals will be handled automatically when you deposit.
+            To try LiquidMesh on Somnia Testnet, first get test assets using this
+            faucet step. Wrap a small amount of STT into wSTT and mint mock USDC.
+            These tokens are for testing only and enable the next step (Deposit).
+            Approvals are handled automatically when you click Deposit later.
+            <br />
+            <span className="text-xs text-muted-foreground">
+              Contracts: wSTT
+              {" "}
+              <a
+                className="underline"
+                href={`https://shannon-explorer.somnia.network/address/${CONTRACTS.WrappedSTT}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {CONTRACTS.WrappedSTT}
+              </a>
+              {" • "}USDC
+              {" "}
+              <a
+                className="underline"
+                href={`https://shannon-explorer.somnia.network/address/${CONTRACTS.MockUSDC}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {CONTRACTS.MockUSDC}
+              </a>
+            </span>
           </AlertDescription>
         </Alert>
 

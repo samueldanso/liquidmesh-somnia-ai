@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LavaLamp } from "@/components/ui/fluid-blob";
+import { env } from "@/env";
 import { HeroHeader } from "@/components/web/header";
 
 export default function Hero() {
@@ -28,7 +29,7 @@ export default function Hero() {
               variant="gradient"
               className="px-8 py-3 rounded-md text-base font-medium"
             >
-              <Link href="/app">Launch AgentMesh</Link>
+              <Link href="/dashboard" target="_blank" rel="noopener noreferrer">Launch AgentMesh</Link>
             </Button>
           </div>
         </div>
