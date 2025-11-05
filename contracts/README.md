@@ -101,11 +101,6 @@ npx hardhat run scripts/deploy.ts --network somnia
 
 ---
 
-## 🔗 **Integration**
-
-For integration with frontend and agents, see the main project [INTEGRATION-GUIDE.md](../INTEGRATION-GUIDE.md).
-
-
 ## 🧪 **Testing**
 
 ### **Run Tests**
@@ -130,6 +125,11 @@ All contracts are already verified! View them at:
 -   [MockUSDC](https://shannon-explorer.somnia.network/address/0x758dA18F8424f637f788a0CD0DAF8407069D380b#code)
 -   [LiquidityVault](https://shannon-explorer.somnia.network/address/0x28205BB97e1BEe146E0b095D3cf62433D9bAb47d#code)
 -   [AgentExecutor](https://shannon-explorer.somnia.network/address/0x5e639e2F345577514aFA0159AEdDf0A832e4139f#code)
+
+### DEX Adapter Notes
+
+-   Current demo integration uses the `LiquidityVault` together with a Uniswap V2-style router (Somnia Exchange V2) for agent-driven deposits/withdrawals.
+-   Planned concentrated-liquidity integrations (Somnex/QuickSwap V3) will rely on their position manager contracts once available on Somnia Testnet.
 
 ---
 
