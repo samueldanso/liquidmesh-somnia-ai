@@ -19,10 +19,7 @@ export default function Hero() {
             Liquidity Unlocked
           </h1>
           <p className="mt-4 text-lg lg:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed">
-            LiquidMesh is a decentralized, non-custodial liquidity orchestration
-            protocol powered by a multi-agent framework — enabling LPs to
-            achieve maximum capital efficiency and superior risk-adjusted yields
-            across Somnia.
+          LiquidMesh is a decentralized, non-custodial liquidity protocol powered by our multi-agent orchestration framework — enabling LPs to achieve maximum capital efficiency and superior risk-adjusted yields across Somnia.
           </p>
           <div className="mt-6">
             <Button
@@ -31,9 +28,7 @@ export default function Hero() {
               variant="gradient"
               className="px-8 py-3 rounded-md text-base font-medium"
             >
-              <Link href="/dashboard" target="_blank" rel="noopener noreferrer">
-                Launch AgentMesh
-              </Link>
+              <Link href="/app">Launch AgentMesh</Link>
             </Button>
           </div>
         </div>

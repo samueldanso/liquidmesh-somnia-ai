@@ -26,13 +26,7 @@ export function CallToAction() {
                 variant="gradient"
                 className="px-8 py-3 rounded-md text-base font-medium"
               >
-                <Link
-                  href="/dashboard"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Launch App
-                </Link>
+                <Link href="/app">Launch App</Link>
               </Button>
             </div>
           </div>
