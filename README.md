@@ -2,7 +2,7 @@
 
 **The AI orchestration layer for concentrated liquidity on Somnia.**
 
--   **Video Demo**: [Watch Demo]()
+-   **Video Demo**: [Watch Demo](https://youtu.be/P9GxJHiaDZ8)
 -   **Pitch Deck**: [View Presentation](https://docs.google.com/presentation/d/1CEXuzhR3oKazKGyRiHKeAKz3YBoGgwpa/edit?usp=sharing&ouid=106871444288832035093&rtpof=true&sd=true)
 
 LiquidMesh is a **decentralized, non-custodial autonomous liquidity orchestration protocol** built on Somnia powered by a multi-agent orchestration framework. It enables liquidity providers (LPs) to achieve maximum capital efficiency and superior risk-adjusted yield by autonomously reasoning, executing, and managing liquidity positions across Somnia DEXes and beyond.
